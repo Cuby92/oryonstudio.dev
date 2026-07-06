@@ -7,3 +7,9 @@
         font-size: 16px;
     }
 }
+
+@layer layout {
+    .Main {
+        min-height: 100lvh;
+    }
+}

@@ -7,8 +7,8 @@ const s = styles;
 function Home() {
   return (
     <ScrollSmootherWrapper>
-      <main>
-        
+      <main className="Main">
+
       </main>
       <Footer />
     </ScrollSmootherWrapper>
