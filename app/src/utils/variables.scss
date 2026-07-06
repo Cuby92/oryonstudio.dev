@@ -1,0 +1,26 @@
+@mixin alignGrid($horizontally: center, $vertically: center, $text: left) {
+    align-self: $vertically;
+    justify-self: $horizontally;
+    text-align: $text;
+}
+
+@mixin flexAlign($horizontally: center, $vertically: center, $text: left) {
+    display: flex;
+    justify-content: $horizontally;
+    align-items: $vertically;
+    text-align: $text;
+}
+
+@mixin flexColumn($gap) {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+}
+
+@mixin maskImage($size, $image) {
+    width: $size;
+    height: $size;
+    mask-size: contain;
+    mask-position: center;
+    mask-image: $image;
+}
