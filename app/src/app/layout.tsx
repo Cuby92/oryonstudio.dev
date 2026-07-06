@@ -3,8 +3,8 @@ import { Children } from "@/utils/types";
 import "./globals.scss";
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "ORYON STUDIO | Premium Next.js Web Design & Development",
+  description: "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out.",
 };
 
 function RootLayout({ children }: Children) {
