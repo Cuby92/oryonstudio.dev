@@ -1,9 +1,6 @@
-import styles from './../links.module.scss';
 import { LinkProps } from '@/utils/types';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-
-const s = styles;
 
 interface Props extends LinkProps {
     onMouseEnter?: () => void;
@@ -16,7 +13,7 @@ function SidebarLink({ children, href, className, active = false, onMouseEnter, 
     return (
         <MotionLink
             href={href}
-            className={`${className} ${s.mainCategoryLink}`}
+            className={`${className}`}
             style={ active ? { x: '2.25rem', scale: 1.01, fontWeight: 300 } : {} }
             onMouseEnter={onMouseEnter}
             onClick={onClick}

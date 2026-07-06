@@ -16,28 +16,6 @@
     -webkit-backdrop-filter: blur(20px);
     z-index: 1000;
 
-    .logo {
-        width: clamp(200px, 300px, 40vw);
-        aspect-ratio: 1288 / 158;
-        mask-image: url('/img/logo/logo-white.svg');
-        mask-repeat: no-repeat;
-        @include stdGradient();
-        position: relative;
-        display: inline-block;
-
-        &::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: var(--beforeOpacity);
-            background: linear-gradient(
-                45deg,
-                $pinkLCH,
-                lch(45.64 116.51 313.28)
-            );
-        }
-    }
-
     .Hamburger {
         $size: 2.5rem;
         $thickness: 0.3rem;
@@ -46,13 +24,13 @@
         position: relative;
 
         *[class*="Bar"] {
-            background-color: $pink;
+            background-color: #f0f;
         }
 
         .TopBar, .BottomBar {
             width: $size;
             height: $thickness;
-            background: $pink;
+            background: #f0f;
             position: absolute;
             border-radius: calc($thickness / 3);
             transform-origin: 0 50%;

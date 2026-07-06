@@ -1,13 +1,13 @@
 'use client';
 
-import styles from './NavBar.module.scss';
+import styles from './Navbar.module.scss';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import { useState, useRef, useEffect } from 'react';
 
 const s = styles;
 
-function NavBar() {
+function Navbar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const headerRef = useRef<HTMLElement | null>(null);
     const [headerHeight, setHeaderHeight] = useState(0);
@@ -33,4 +33,4 @@ function NavBar() {
     );
 }
 
-export default NavBar;
+export default Navbar;

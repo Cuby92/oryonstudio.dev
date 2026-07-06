@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Children } from "@/utils/types";
 import "./globals.scss";
+import Navbar from "@/components/Navbar/Navbar";
 
 export const metadata: Metadata = {
   title: "ORYON STUDIO | Premium Next.js Web Design & Development",
@@ -11,6 +12,7 @@ function RootLayout({ children }: Children) {
   return (
     <html lang="en">
       <body>
+        <Navbar />
         { children }
       </body>
     </html>
