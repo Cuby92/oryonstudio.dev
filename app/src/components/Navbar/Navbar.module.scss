@@ -1,3 +1,5 @@
+@use './../../utils/variables' as *;
+
 .Hitbox {
     position: fixed;
     width: 100vw;
