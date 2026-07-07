@@ -3,6 +3,7 @@
 import styles from './Sidebar.module.scss';
 import SidebarLink from '@/components/Navbar/Sidebar/link';
 import { useState } from 'react';
+import { LinkTemplate } from '@/utils/types';
 
 const s = styles;
 
@@ -15,15 +16,34 @@ interface Props {
 function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
     const [activeLink, setActiveLink] = useState(0);
 
+    const links: LinkTemplate[] = [
+        { href: '/',           label: 'Home'           },
+        { href: '/about',      label: 'About Us'       },
+        { href: '/services',   label: 'Our Services'   },
+        { href: '/experience', label: 'Our Experience' },
+        { href: '/contact',    label: 'Contact'        }
+    ];
+
+    function createLink(link: LinkTemplate, index: number) {
+        return (
+            <SidebarLink
+                key={index}
+                onClick={ () => setSidebarOpen(false) }
+                className={s.link}
+                onMouseEnter={ () => setActiveLink(index + 1) }
+                active={ activeLink == index + 1 }
+                href={link.href}
+            >
+                {link.label}
+            </SidebarLink>
+        );
+    }
+
     return (
         <div className={s.Sidebar} style={{ paddingTop: headerHeight }} onMouseLeave={ () => setActiveLink(0) }>
             <div className={s.Section1}>
                 <nav className={s.Links}>
-                    <SidebarLink onClick={() => setSidebarOpen(false) } className={s.link} onMouseEnter={ () => setActiveLink(1)} active={activeLink === 1} href='/'          >Home          </SidebarLink>
-                    <SidebarLink onClick={() => setSidebarOpen(false) } className={s.link} onMouseEnter={ () => setActiveLink(2)} active={activeLink === 2} href="/about"     >About Us      </SidebarLink>
-                    <SidebarLink onClick={() => setSidebarOpen(false) } className={s.link} onMouseEnter={ () => setActiveLink(3)} active={activeLink === 3} href="/services"  >Our Services  </SidebarLink>
-                    <SidebarLink onClick={() => setSidebarOpen(false) } className={s.link} onMouseEnter={ () => setActiveLink(4)} active={activeLink === 4} href="/experience">Our Experience</SidebarLink>
-                    <SidebarLink onClick={() => setSidebarOpen(false) } className={s.link} onMouseEnter={ () => setActiveLink(5)} active={activeLink === 5} href="/contact"   >Contact       </SidebarLink>
+                    { links.map(link => createLink(link, links.indexOf(link))) }
                 </nav>
             </div>
         </div>

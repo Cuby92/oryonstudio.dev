@@ -10,6 +10,11 @@ export interface LinkProps {
     visited?: boolean
 }
 
+export interface LinkTemplate {
+    href: string;
+    label: string;
+}
+
 // Refs and Elements
  export type H      = HTMLHeadingElement   | null;
  export type HRef   = React.RefObject<H>;
