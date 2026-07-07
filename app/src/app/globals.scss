@@ -1,3 +1,9 @@
+root { 
+    --electricBlue: $electricBlue;
+    --cobaltBlue: $cobaltBlue;
+    --mutedGray: $mutedGray;
+}
+
 @layer reset {
     html, body {
         padding: 0;

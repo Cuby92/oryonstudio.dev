@@ -19,7 +19,7 @@
     .logo {
         height: 2rem;
         width: auto;
-        @include logoMask(#22f, 7rem);
+        @include logoMask($cobaltBlue, 7rem);
         display: inline-block;
     }
 
@@ -29,15 +29,20 @@
         width: $size;
         height: $size;
         position: relative;
+        padding: 0;
+        margin: 0 1rem 0 0;
+        background: none;
+        border: none;
+        outline: none;
 
         *[class*="Bar"] {
-            background-color: #f0f;
+            background-color: $cobaltBlue;
         }
 
         .TopBar, .BottomBar {
             width: $size;
             height: $thickness;
-            background: #f0f;
+            background: $electricBlue;
             position: absolute;
             border-radius: calc($thickness / 3);
             transform-origin: 0 50%;

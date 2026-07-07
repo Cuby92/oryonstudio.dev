@@ -1,4 +1,4 @@
-@mixin alignGrid($horizontally: center, $vertically: center, $text: left) {
+@mixin gridAlign($horizontally: center, $vertically: center, $text: left) {
     align-self: $vertically;
     justify-self: $horizontally;
     text-align: $text;
@@ -32,3 +32,7 @@
     mask-size: cover;
     margin-top: calc(-0.15 * $size);
 }
+
+$electricBlue: #00f;
+$cobaltBlue:   #0a21ff;
+$mutedGray:    #8e919a;

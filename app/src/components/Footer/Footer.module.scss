@@ -1,5 +1,7 @@
+@use './../../utils/variables.scss' as *;
+
 .Footer {
     width: 100%;
     height: 5rem;
-    background-color: #00f;
+    background-color: $electricBlue;
 }
