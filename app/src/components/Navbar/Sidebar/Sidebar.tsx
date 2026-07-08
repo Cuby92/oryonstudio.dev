@@ -2,8 +2,11 @@
 
 import styles from './Sidebar.module.scss';
 import SidebarLink from '@/components/Navbar/Sidebar/link';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { LinkTemplate } from '@/utils/types';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { Div, DivRef } from '@/utils/types';
 
 const s = styles;
 
@@ -14,6 +17,26 @@ interface Props {
 }
 
 function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
+    const sidebar: DivRef = useRef<Div>(null);
+
+    useGSAP(() => {
+        if (typeof window === 'undefined')  return;
+
+        if (open) {
+            gsap.to(sidebar.current, {
+                duration: 1,
+                top: 0,
+                ease: 'back.out(1)'
+            });
+        } else {
+            gsap.to(sidebar.current, {
+                duration: 1,
+                top: '-100%',
+                ease: 'back.in(1)'
+            });
+        }
+    }, { dependencies: [open] });
+
     const [activeLink, setActiveLink] = useState(0);
 
     const links: LinkTemplate[] = [
@@ -40,7 +63,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
     }
 
     return (
-        <div className={s.Sidebar} style={{ paddingTop: headerHeight }} onMouseLeave={ () => setActiveLink(0) }>
+        <div className={s.Sidebar} style={{ paddingTop: headerHeight }} onMouseLeave={ () => setActiveLink(0) } ref={sidebar}>
             <div className={s.Section1}>
                 <nav className={s.Links}>
                     { links.map(link => createLink(link, links.indexOf(link))) }
