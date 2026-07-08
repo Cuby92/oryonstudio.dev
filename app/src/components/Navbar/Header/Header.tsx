@@ -173,7 +173,7 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
 
     return (
         <header className={s.Header} id="Header" ref={ref}>
-            <MotionLink className={s.logo} href="/"></MotionLink>
+            <MotionLink className={s.logo} href="/" onClick={() => { setHamburgerState(false) }}></MotionLink>
 
             <button className={`${s.Hamburger} ${s.btn} btn`} onClick={toggleHamburger} ref={hamburger}>
                 <div className={s.TopBar}    ref={topBar}   ></div>
