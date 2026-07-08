@@ -173,14 +173,7 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
 
     return (
         <header className={s.Header} id="Header" ref={ref}>
-            <MotionLink 
-                className={s.logo} href="/" 
-                whileHover={{
-                    '--beforeOpacity': 1, 
-                    transition: { duration: 0.4, ease: 'easeOut' }
-                }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}>
-            </MotionLink>
+            <MotionLink className={s.logo} href="/"></MotionLink>
 
             <button className={`${s.Hamburger} ${s.btn} btn`} onClick={toggleHamburger} ref={hamburger}>
                 <div className={s.TopBar}    ref={topBar}   ></div>
