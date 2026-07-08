@@ -1,6 +1,9 @@
 import { LinkProps } from '@/utils/types';
 import Link from 'next/link';
 import { motion } from 'motion/react';
+import styles from './Sidebar.module.scss';
+
+const s = styles;
 
 interface Props extends LinkProps {
     onMouseEnter?: () => void;
@@ -13,12 +16,11 @@ function SidebarLink({ children, href, className, active = false, onMouseEnter, 
     return (
         <MotionLink
             href={href}
-            className={`${className}`}
-            style={ active ? { x: '2.25rem', scale: 1.01, fontWeight: 300 } : {} }
+            className={`${className} ${s.link}`}
             onMouseEnter={onMouseEnter}
             onClick={onClick}
         >
-            { active ? <span style={{ color: '#f0f', transition: 'color 0.5s ease-in' }}>//</span> : <span style={{ color: '#f0f0', transition: 'color 0.5s ease-in-out' }}>//</span> } { children }
+            { children }
         </MotionLink>
     );
 }

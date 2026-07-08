@@ -64,11 +64,9 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
 
     return (
         <div className={s.Sidebar} style={{ paddingTop: headerHeight }} onMouseLeave={ () => setActiveLink(0) } ref={sidebar}>
-            <div className={s.Section1}>
-                <nav className={s.Links}>
-                    { links.map(link => createLink(link, links.indexOf(link))) }
-                </nav>
-            </div>
+            <nav className={s.Links}>
+                { links.map(link => createLink(link, links.indexOf(link))) }
+            </nav>
         </div>
     );
 }
