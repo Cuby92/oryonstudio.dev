@@ -105,7 +105,7 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
                     .to(hamburger.current, {
                         rotateZ: -360 * 2 + 90,
                         ease: 'power1.out',
-                        easeReverse: true,
+                        easeReverse: 'ease.InOut',
                         duration: 1
                     })
                     .to([topBar.current, bottomBar.current], {
@@ -123,7 +123,7 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
                         duration: 0.25,
                         ease: 'power4.in',
                         easeReverse: true
-                    }, 0)
+                    }, '<')
                     .to(midBar2.current, {
                         x: '100%',
                         y: '50%',
@@ -133,33 +133,33 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
                         duration: 0.25,
                         ease: 'power4.in',
                         easeReverse: true
-                    }, '<25%')
+                    }, '<')
                     .to(topBar.current, {
                         rotate: 45,
                         duration: 0.3,
                         ease: 'power4.inOut',
                         easeReverse: true
-                    }, '<50%')
+                    }, '<')
                     .to(bottomBar.current, {
                         rotate: -45,
                         duration: 0.3,
                         ease: 'power3.inOut',
                         easeReverse: true
-                    }, '<30%')
+                    }, '<')
                     .to(topBar.current, {
                         x: rem(hamburgerLineThickness * 1.2),
                         y: rem(hamburgerLineThickness / 2 * 1.2),
                         duration: 0.3,
                         ease: 'power1.inOut',
                         easeReverse: true
-                    }, '<20%')
+                    }, '<')
                     .to(bottomBar.current, {
                         x: rem(hamburgerLineThickness * 1.2),
                         y: rem(-hamburgerLineThickness / 2 * 1.2),
                         duration: 0.3,
                         ease: 'power2.inOut',
                         easeReverse: true
-                    }, '<5%');
+                    }, '<');
             }
             if (hamburgerState) {
                 onTl.current.restart();
