@@ -2,7 +2,7 @@
 
 import styles from './Sidebar.module.scss';
 import CypherLink from '@/components/links/cypher';
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -42,8 +42,6 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
 
     const t = useTranslations('global.links');
 
-    const [activeLink, setActiveLink] = useState(0);
-
     const links: LinkTemplate[] = [
         { href: '/',           label: t('home')       },
         { href: '/about',      label: t('about')      },
@@ -72,7 +70,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
     }, [pathname]);
 
     return (
-        <div className={s.Sidebar} style={{ paddingTop: headerHeight }} onMouseLeave={ () => setActiveLink(0) } ref={sidebar}>
+        <div className={s.Sidebar} style={{ paddingTop: headerHeight }} ref={sidebar}>
             <nav className={s.Links}>
                 { links.map(link => createLink(link, links.indexOf(link))) }
             </nav>
