@@ -4,8 +4,8 @@
             "home": "strona_główna",
             "about": "o_nas",
             "contact": "kontakt",
-            "experience": "nasze_doświadczenie",
-            "services": "nasze_usługi"
+            "experience": "doświadczenie",
+            "services": "usługi"
         }
     },
 
