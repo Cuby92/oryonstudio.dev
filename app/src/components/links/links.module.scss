@@ -1,0 +1,14 @@
+@use '../../utils/variables.scss' as *;
+
+.cypherLink {
+    color: #fff;
+    text-decoration: none;
+    font-family: $googleCode;
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+    font-weight: 300;
+
+    .terminalSymbol {
+        color: #888;
+    }
+}

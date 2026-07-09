@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Sidebar.module.scss';
-import SidebarLink from '@/components/Navbar/Sidebar/link';
+import CypherLink from '@/components/links/cypher';
 import { useState, useRef, useEffect } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
@@ -62,7 +62,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
 
     function createLink(link: LinkTemplate, index: number) {
         return (
-            <SidebarLink
+            <CypherLink
                 key={index}
                 onClick={ () => setSidebarOpen(false) }
                 className={s.link}

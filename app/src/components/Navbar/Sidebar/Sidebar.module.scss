@@ -16,18 +16,5 @@
         width: 100%;
         @include flexAlign();
         padding: 2rem 0;
-
-        .link {
-            color: #fff;
-            text-decoration: none;
-            font-family: $googleCode;
-            font-size: 1.2rem;
-            letter-spacing: 0.05rem;
-            font-weight: 300;
-
-            .terminalSymbol {
-                color: #888;
-            }
-        }
     }
 }

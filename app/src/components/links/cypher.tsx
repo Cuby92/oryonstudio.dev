@@ -3,7 +3,7 @@
 import { LinkProps } from '@/utils/types';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import styles from './Sidebar.module.scss';
+import styles from './links.module.scss';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { useRef, useState } from 'react';
 import { A, ARef } from '@/utils/types';
@@ -19,7 +19,7 @@ interface Props extends LinkProps {
 
 const MotionLink = motion.create(Link);
 
-function SidebarLink({ href, className, onClick, label = 'label', active } : Props) {
+function CypherLink({ href, className, onClick, label = 'label', active } : Props) {
     const linkRef: ARef = useRef<A>(null);
     const [hover, setHover] = useState<boolean>(false);
 
@@ -51,7 +51,7 @@ function SidebarLink({ href, className, onClick, label = 'label', active } : Pro
     return (
         <MotionLink
             href={href}
-            className={`${className} ${s.link}`}
+            className={`${className} ${s.cypherLink}`}
             onClick={onClick}
             ref={linkRef}
             onMouseEnter={handleMouseEnter}
@@ -62,4 +62,4 @@ function SidebarLink({ href, className, onClick, label = 'label', active } : Pro
     );
 }
 
-export default SidebarLink;
+export default CypherLink;
