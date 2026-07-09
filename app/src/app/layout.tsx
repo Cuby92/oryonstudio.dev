@@ -3,6 +3,7 @@ import { Children } from "@/utils/types";
 import "./globals.scss";
 import Navbar from "@/components/Navbar/Navbar";
 import { Raleway, Poppins, Ubuntu_Sans_Mono, Google_Sans_Code } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ function RootLayout({ children }: Children) {
       <body>
         <Navbar />
         { children }
+        <SpeedInsights />
       </body>
     </html>
   );
