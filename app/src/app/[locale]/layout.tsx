@@ -25,11 +25,6 @@ const poppins = Poppins({
   weight:   ["100", "200", "300", "400", "500", "600", "700"]
 });
 
-const ubuntuMono = Ubuntu_Sans_Mono({
-  subsets:  ["latin"],
-  variable: "--ubuntuMono"
-});
-
 const googleCode = Google_Sans_Code({
   subsets:  ["latin"],
   variable: "--googleCode"
@@ -49,7 +44,7 @@ async function RootLayout({ children, params }: { children: React.ReactNode; par
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className={`${raleway.variable} ${poppins.variable} ${ubuntuMono.variable} ${googleCode.variable}`}>
+    <html lang={locale} className={`${raleway.variable} ${poppins.variable} ${googleCode.variable}`}>
       <body>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
