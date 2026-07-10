@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.scss";
 import Navbar from "@/components/Navbar/Navbar";
-import { Raleway, Poppins, Ubuntu_Sans_Mono, Google_Sans_Code } from "next/font/google";
+import { Raleway, Poppins, Google_Sans_Code } from "next/font/google";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from 'next-intl';
