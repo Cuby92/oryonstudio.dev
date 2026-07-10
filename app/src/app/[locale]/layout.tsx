@@ -9,6 +9,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import type { Locale } from '@/i18n/types';
+import { getTranslations } from 'next-intl/server';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -30,10 +31,16 @@ const googleCode = Google_Sans_Code({
   variable: "--googleCode"
 });
 
-export const metadata: Metadata = {
-  title: "ORYON STUDIO | Premium Next.js Web Design & Development",
-  description: "We craft high-performance, visually stunning websites using Next.js. Tailored digital experiences for ambitious brands looking to stand out.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  if (!routing.locales.includes(locale as Locale)) notFound();
+  const t = await getTranslations({ locale, namespace: "home.metadata" });
+
+  return {
+    title: t('title'),
+    description: t('description')
+  };
+}
 
 async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await params;
