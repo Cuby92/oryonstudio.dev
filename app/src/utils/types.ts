@@ -8,7 +8,8 @@ export interface LinkProps {
     className?: string,
     active?:    boolean,
     visited?:   boolean,
-    label?:     string
+    label?:     string,
+    ref?:       React.RefObject<A>
 }
 
 export interface LinkTemplate {

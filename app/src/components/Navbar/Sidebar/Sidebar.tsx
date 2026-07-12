@@ -9,6 +9,8 @@ import { useGSAP } from '@gsap/react';
 import { Div, DivRef } from '@/utils/types';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { A, ARef } from '@/utils/types';
+import { linksColumnSlide } from '@/utils/gsap/animations';
 
 const s = styles;
 
@@ -50,6 +52,13 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
         { href: '/contact',    label: t('contact')    }
     ];
 
+    const linksRefs: ARef[] = Array.from({ length: links.length }, () => useRef<A>(null));
+
+    useGSAP(() => {
+        if (open) linksColumnSlide. in(linksRefs);
+        else      linksColumnSlide.out(linksRefs);
+    }, { dependencies: [open] });
+
     function createLink(link: LinkTemplate, index: number) {
         const isHome = pathname.length == 3 && link.href == '/';
 
@@ -61,6 +70,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
                 href={link.href}
                 label={link.label}
                 active={pathname.substring(3) === link.href || isHome}
+                ref={linksRefs[index]}
             />
         );
     }

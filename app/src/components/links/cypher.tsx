@@ -20,8 +20,7 @@ interface Props extends LinkProps {
 
 const MotionLink = motion.create(Link);
 
-function CypherLink({ href, className, onClick, label = 'label', active } : Props) {
-    const linkRef: ARef = useRef<A>(null);
+function CypherLink({ href, className, onClick, label = 'label', active, ref } : Props) {
     const textRef: AnyRef = useRef<Any>(null);
 
     const { contextSafe } = useGSAP();
@@ -61,7 +60,7 @@ function CypherLink({ href, className, onClick, label = 'label', active } : Prop
             href={href}
             className={`${className} ${s.cypherLink}`}
             onClick={onClick}
-            ref={linkRef}
+            ref={ref}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
