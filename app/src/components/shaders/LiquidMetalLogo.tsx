@@ -20,4 +20,4 @@ function LiquidMetalLogo() {
     );
 }
 
-export default LiquidMetalLogo
+export default LiquidMetalLogo;
