@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Link } from '@/i18n/navigation';
+import LogoDraw from '@/components/LogoDraw';
 
 const s = styles;
 
@@ -173,7 +174,13 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
 
     return (
         <header className={s.Header} id="Header" ref={ref}>
-            <MotionLink className={s.logo} href="/" onClick={() => { setHamburgerState(false) }}></MotionLink>
+            <Link className={s.logo} href='/' onClick={() => setHamburgerState(false)}>
+                <LogoDraw 
+                    active={!headerHidden}
+                    strokeWidth={20}
+                    color='#0a21ff'
+                />
+            </Link>
 
             <button className={`${s.Hamburger} ${s.btn} btn`} onClick={toggleHamburger} ref={hamburger}>
                 <div className={s.TopBar}    ref={topBar}   ></div>

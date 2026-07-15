@@ -17,9 +17,8 @@
     z-index: 1000;
 
     .logo {
-        height: 2rem;
+        height: 6rem;
         width: auto;
-        @include logoMask($cobaltBlue, 7rem);
         display: inline-block;
     }
 
