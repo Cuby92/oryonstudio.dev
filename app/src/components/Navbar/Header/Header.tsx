@@ -79,7 +79,7 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
             lastScroll = currentScroll;
         }
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
