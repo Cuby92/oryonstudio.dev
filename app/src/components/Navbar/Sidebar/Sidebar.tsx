@@ -2,7 +2,7 @@
 
 import styles from './Sidebar.module.scss';
 import CypherLink from '@/components/links/cypher';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -74,7 +74,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
             />
         );
     }
-    
+
     return (
         <div className={s.Sidebar} style={{ paddingTop: headerHeight }} ref={sidebar}>
             <nav className={s.Links}>
