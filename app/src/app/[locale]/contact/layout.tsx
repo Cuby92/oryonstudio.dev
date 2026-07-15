@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 import { readMetadata } from '@/i18n/functions';
 
 import dynamic from 'next/dynamic';
-const ScrollSmootherWrapper = dynamic(() => import('@/utils/gsap/ScrollSmoother'), { ssr: false });
+const ScrollSmootherWrapper = dynamic(() => import('@/utils/gsap/ScrollSmoother'));
 
 export async function generateMetadata({ params }: MetadataParams): Promise<Metadata> {
     const { locale } = await params;

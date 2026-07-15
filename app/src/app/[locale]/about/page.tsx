@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './page.module.scss';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';

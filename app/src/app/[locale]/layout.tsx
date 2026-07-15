@@ -11,7 +11,7 @@ import { routing } from '@/i18n/routing';
 
 import dynamic from 'next/dynamic';
 const Navbar             = dynamic(() => import('@/components/Navbar/Navbar'));
-const TransitionProvider = dynamic(() => import('@/components/transitions/TransitionProvider'), { ssr: false });
+const TransitionProvider = dynamic(() => import('@/components/transitions/TransitionProvider'));
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

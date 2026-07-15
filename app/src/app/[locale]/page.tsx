@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './page.module.scss';
 import ScrollSmootherWrapper from '@/utils/gsap/ScrollSmoother';
 import Footer from '@/components/Footer/Footer';
