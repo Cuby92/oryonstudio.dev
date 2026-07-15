@@ -17,9 +17,6 @@ function Home() {
           <FoggyBlob />
           <h1>{ t('page under construction') } <span className={s.pointer}>█</span></h1>
         </Slide>
-        <Slide>
-          <p></p>
-        </Slide>
       </main>
       <Footer />
     </ScrollSmootherWrapper>
