@@ -170,8 +170,6 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
         }
     }, { dependencies: [hamburgerState] });
 
-    const MotionLink = motion.create(Link);
-
     return (
         <header className={s.Header} id="Header" ref={ref}>
             <Link className={s.logo} href='/' onClick={() => setHamburgerState(false)}>
