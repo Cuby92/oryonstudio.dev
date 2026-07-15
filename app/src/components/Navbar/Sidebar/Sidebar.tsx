@@ -74,11 +74,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
             />
         );
     }
-
-    useEffect(() => {
-    console.log(pathname);
-    }, [pathname]);
-
+    
     return (
         <div className={s.Sidebar} style={{ paddingTop: headerHeight }} ref={sidebar}>
             <nav className={s.Links}>
