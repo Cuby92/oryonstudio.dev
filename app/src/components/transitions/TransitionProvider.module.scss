@@ -38,9 +38,11 @@
         font-family: $raleway;
         will-change: transform;
         overflow: hidden;
+        pointer-events: none;
 
         .oryon, .studio {
             display: inline-block;
+            transform: translateY(100%);
         }
 
         .oryon {
