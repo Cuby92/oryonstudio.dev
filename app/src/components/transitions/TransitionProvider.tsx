@@ -28,7 +28,7 @@ function TransitionProvider({ children }: Children) {
                 scaleX: 0
             });
 
-            blocks.forEach((block, index) => {
+            blocks.forEach((block) => {
                 tl.to(block, {
                     scaleX: 1,
                     duration: 1,
@@ -48,7 +48,7 @@ function TransitionProvider({ children }: Children) {
                 scaleX: 1
             });
 
-            blocks.forEach((block, index) => {
+            blocks.forEach((block) => {
                 tl.to(block, {
                     scaleX: 0,
                     duration: 1,
