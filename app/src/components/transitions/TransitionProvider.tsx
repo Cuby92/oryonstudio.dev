@@ -15,10 +15,10 @@ const rows = 4;
 const eases = ['power1.out', 'power2.out', 'power3.out', 'power4.out'];
 
 function TransitionProvider({ children }: Children) {
-    const gridRef:    DivRef               = useRef<Div>(null);
-    const blocksRefs: DivRef[]             = Array.from({ length: rows }, () => useRef<Div>(null));
-    const headingRef: HRef                 = useRef<H>(null);
-    const wordsRefs:  AnyRef[]             = Array.from({ length: rows }, () => useRef<Any>(null));
+    const gridRef:    DivRef   = useRef<Div>(null);
+    const blocksRefs: DivRef[] = Array.from({ length: rows }, () => useRef<Div>(null));
+    const headingRef: HRef     = useRef<H>(null);
+    const wordsRefs:  AnyRef[] = Array.from({ length: rows }, () => useRef<Any>(null));
 
     const animate: {
         in:  (onComplete: () => void) => gsap.core.Timeline;
@@ -36,7 +36,7 @@ function TransitionProvider({ children }: Children) {
 
             tl.set(words, {
                 y: '100%'
-            })
+            });
 
             blocks.forEach((block) => {
                 tl.to(block, {
