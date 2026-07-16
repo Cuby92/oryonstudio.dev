@@ -1,25 +1,34 @@
 'use client';
 
 import { Children, Div, DivRef, H, HRef, Any, AnyRef } from '@/utils/types';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import styles from './TransitionProvider.module.scss';
 import { gsap } from 'gsap';
 import { mapArray } from '@/utils/functions';
 import Orion from '@/components/Orion';
 
 import dynamic from 'next/dynamic';
-const TransitionRouter = dynamic(() => import('next-transition-router').then(mod => mod.TransitionRouter), { ssr: false });
+const TransitionRouter = dynamic(
+    () => import('next-transition-router')
+    .then(mod => mod.TransitionRouter),
+    { ssr: false }
+);
 
 const s = styles;
 
-const rows = 4;
-const eases = ['power1.out', 'power2.out', 'power3.out', 'power4.out'];
+const ROWS = 4;
+const EASES = ['power1.out', 'power2.out', 'power3.out', 'power4.out'];
 
 function TransitionProvider({ children }: Children) {
-    const gridRef:    DivRef   = useRef<Div>(null);
-    const blocksRefs: DivRef[] = Array.from({ length: rows }, () => useRef<Div>(null));
-    const headingRef: HRef     = useRef<H>(null);
-    const wordsRefs:  AnyRef[] = Array.from({ length: rows }, () => useRef<Any>(null));
+    // const gridRef:    DivRef   = useRef<Div>(null);
+    // const blocksRefs: DivRef[] = useMemo(() => Array.from({ length: ROWS }, () => useRef<Div>(null)), [ROWS]);
+    // const headingRef: HRef     = useRef<H>(null);
+    // const wordsRefs:  AnyRef[] = useMemo(() => Array.from({ length: ROWS }, () => useRef<Any>(null)), []);
+
+    const gridRef    = useRef <Div> (null);
+    const headingRef = useRef <H>   (null);
+    const blocksRef  = useRef <Div[]> ([]);
+    const wordsRef   = useRef <Any[]> ([]);
     
     const [orionActive, setOrionActive] = useState<boolean>(false);
 
@@ -28,10 +37,10 @@ function TransitionProvider({ children }: Children) {
         out: (onComplete: () => void) => gsap.core.Timeline;
     } = {
         in: (onComplete: () => void) => {
-            const tl = gsap.timeline({ onComplete });
-            const blocks = mapArray(blocksRefs);
-            const words  = mapArray(wordsRefs);
+            const blocks = blocksRef.current.filter(Boolean);
+            const words  = wordsRef .current.filter(Boolean);
 
+            const tl = gsap.timeline({ onComplete });
             setOrionActive(true);
 
             tl.set(blocks, {
@@ -47,7 +56,7 @@ function TransitionProvider({ children }: Children) {
                 tl.to(block, {
                     scaleX: 1,
                     duration: 1,
-                    ease: gsap.utils.random(eases),
+                    ease: EASES[Math.floor(Math.random() * EASES.length)],
                 }, '<0.1');
             });
 
@@ -62,10 +71,10 @@ function TransitionProvider({ children }: Children) {
         },
 
         out: (onComplete: () => void) => {
-            const tl = gsap.timeline({ onComplete });
-            const blocks = mapArray(blocksRefs);
-            const words  = mapArray(wordsRefs);
+            const blocks = blocksRef.current.filter(Boolean);
+            const words  = wordsRef .current.filter(Boolean);
 
+            const tl = gsap.timeline({ onComplete });
             setOrionActive(false);
 
             tl.set(blocks, {
@@ -73,7 +82,7 @@ function TransitionProvider({ children }: Children) {
                 scaleX: 1
             });
 
-            tl.set(mapArray(wordsRefs), {
+            tl.set(words, {
                 y: 0
             });
 
@@ -88,7 +97,7 @@ function TransitionProvider({ children }: Children) {
                 tl.to(block, {
                     scaleX: 0,
                     duration: 1,
-                    ease: gsap.utils.random(eases),
+                    ease: EASES[Math.floor(Math.random() * EASES.length)],
                 }, '<0.1');
             }, '<0.9');
             
@@ -109,16 +118,16 @@ function TransitionProvider({ children }: Children) {
             }}
         >
             <div className={s.grid} ref={gridRef}>
-                { Array.from({ length: rows }).map((_, i) => (
+                { Array.from({ length: ROWS }).map((_, i) => (
                     <div 
                         key={i}
                         className={s.block}
-                        ref={blocksRefs[i]}
+                        ref={el => { blocksRef.current[i] = el }}
                     />
                 )) }
 
                 <div className={s.branding}>
-                    <h1 ref={headingRef}><span className={s.oryon} ref={wordsRefs[0]}>ORYON</span><span className={s.studio} ref={wordsRefs[1]}>STUDIO</span></h1>
+                    <h1 ref={headingRef}><span className={s.oryon} ref={ el => { wordsRef.current[0] = el }}>ORYON</span><span className={s.studio} ref={el => { wordsRef.current[1] = el }}>STUDIO</span></h1>
                     <div className={s.orion}>
                         <Orion active={orionActive} starColor='#333' pathColor='#333' />
                     </div>
