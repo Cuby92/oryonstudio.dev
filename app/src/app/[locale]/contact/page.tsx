@@ -1,11 +1,7 @@
-'use client';
-
 import styles from './page.module.scss';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
-
-import dynamic from 'next/dynamic';
-const FoggyBlob = dynamic(() => import('@/components/shaders/FoggyBlob'), { ssr: false });
+import FoggyBlob from '@/components/shaders/FoggyBlob';
 
 const s = styles;
 

@@ -1,11 +1,7 @@
-'use client';
-
 import styles from './page.module.scss';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
-
-import dynamic from 'next/dynamic';
-const LiquidPlasma = dynamic(() => import('@/components/shaders/LiquidPlasma'), { ssr: false });
+import LiquidPlasma from '@/components/shaders/LiquidPlasma';
 
 const s = styles;
 
