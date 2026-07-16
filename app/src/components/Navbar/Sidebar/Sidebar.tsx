@@ -2,7 +2,7 @@
 
 import styles from './Sidebar.module.scss';
 import CypherLink from '@/components/links/cypher';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -44,13 +44,13 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
 
     const t = useTranslations('global.links');
 
-    const links: LinkTemplate[] = [
+    const links: LinkTemplate[] = useMemo(() => [
         { href: '/',           label: t('home')       },
         { href: '/about',      label: t('about')      },
         { href: '/experience', label: t('experience') },
         { href: '/services',   label: t('services')   },
         { href: '/contact',    label: t('contact')    }
-    ];
+    ], [t]);
 
     const linksRefs: ARef[] = Array.from({ length: links.length }, () => useRef<A>(null));
 
