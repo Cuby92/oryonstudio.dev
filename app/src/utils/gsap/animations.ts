@@ -1,12 +1,13 @@
 import { gsap } from 'gsap';
 import { ARef } from '@/utils/types';
+import { mapArray } from '@/utils/functions';
 
 export const linksColumnSlide: {
-    in:  (elements: React.RefObject<ARef[]>) => gsap.core.Tween,
-    out: (elements: React.RefObject<ARef[]>) => gsap.core.Tween
+    in:  (elements: ARef[]) => gsap.core.Tween,
+    out: (elements: ARef[]) => gsap.core.Tween
 } = {
-    in: (elements: React.RefObject<ARef[]>): gsap.core.Tween => {
-        return gsap.fromTo(elements.current, {
+    in: (elements: ARef[]): gsap.core.Tween => {
+        return gsap.fromTo(mapArray(elements), {
             x: index => index % 2 == 0 ? 50 : -50,
             opacity: 0
         }, {
@@ -17,8 +18,8 @@ export const linksColumnSlide: {
             ease: 'power1.out'
         });
     },
-    out: (elements: React.RefObject<ARef[]>): gsap.core.Tween => {
-        return gsap.fromTo(elements.current, {
+    out: (elements: ARef[]): gsap.core.Tween => {
+        return gsap.fromTo(mapArray(elements), {
             x: 0,
             opacity: 1,
         }, {

@@ -52,11 +52,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
         { href: '/contact',    label: t('contact')    }
     ], [t]);
 
-    const linksRefs = useRef<ARef[]>([]);
-
-    if (linksRefs.current.length != links.length) {
-        linksRefs.current = links.map(() => createRef<A>())
-    }
+    const linksRefs = Array.from({ length: links.length }, () => useRef<A>(null))
 
     useGSAP(() => {
         if (open) linksColumnSlide. in(linksRefs);
@@ -74,7 +70,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
                 href={link.href}
                 label={link.label}
                 active={pathname.substring(3) === link.href || isHome}
-                ref={linksRefs.current[index]}
+                ref={linksRefs[index]}
             />
         );
     }
