@@ -1,11 +1,13 @@
 'use client';
 
-import { TransitionRouter } from 'next-transition-router';
 import { Children, Div, DivRef, H, HRef, Any, AnyRef } from '@/utils/types';
 import { useRef } from 'react';
 import styles from './TransitionProvider.module.scss';
 import { gsap } from 'gsap';
 import { mapArray } from '@/utils/functions';
+
+import dynamic from 'next/dynamic';
+const TransitionRouter = dynamic(() => import('next-transition-router').then(mod => mod.TransitionRouter), { ssr: false });
 
 const s = styles;
 

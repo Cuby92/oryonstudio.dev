@@ -1,20 +1,14 @@
 'use client';
 
-import { Shader, Plasma, Liquify } from 'shaders/react';
+import ShaderWrapper from './ShaderWrapper';
+
+import dynamic from 'next/dynamic';
+const Plasma  = dynamic(() => import('shaders/react').then(mod => mod.Plasma),  { ssr: false });
+const Liquify = dynamic(() => import('shaders/react').then(mod => mod.Liquify), { ssr: false });
 
 function LiquidGradient() {
     return (
-        <Shader
-            style={{
-                position: 'absolute',
-                width: '110vw',
-                height: '110vh',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: -1
-            }}
-        >
+        <ShaderWrapper>
             <Plasma
                 colorA='#00f'
                 colorB='#000'
@@ -24,7 +18,7 @@ function LiquidGradient() {
                 speed={1}
             />
             <Liquify />
-        </Shader>
+        </ShaderWrapper>
     )
 }
 

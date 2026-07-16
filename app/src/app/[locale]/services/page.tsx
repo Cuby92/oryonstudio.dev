@@ -3,6 +3,8 @@ import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
 import LiquidPlasma from '@/components/shaders/LiquidPlasma';
 
+import dynamic from 'next/dynamic';
+
 const s = styles;
 
 function Services() {

@@ -1,20 +1,14 @@
 'use client';
 
-import { Shader, Blob, Fog } from 'shaders/react';
+import ShaderWrapper from './ShaderWrapper';
+
+import dynamic from 'next/dynamic';
+const Blob = dynamic(() => import('shaders/react').then(mod => mod.Blob), { ssr: false });
+const Fog  = dynamic(() => import('shaders/react').then(mod => mod.Fog),  { ssr: false });
 
 function FoggyBlob() {
     return (
-        <Shader 
-            style={{
-                position: 'absolute',
-                width: '110vw',
-                height: '110vh',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: -1
-            }}
-        >
+        <ShaderWrapper>
             <Blob
                 colorA='#00f'
                 colorB='#33f'
@@ -23,7 +17,7 @@ function FoggyBlob() {
                 colorA='#00fd'
                 colorB='#0000'
             />
-        </Shader>
+        </ShaderWrapper>
     );
 }
 

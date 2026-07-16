@@ -2,7 +2,7 @@
 
 import styles from './Sidebar.module.scss';
 import CypherLink from '@/components/links/cypher';
-import { useRef, useEffect } from 'react';
+import { useRef, createRef, useMemo } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -44,15 +44,19 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
 
     const t = useTranslations('global.links');
 
-    const links: LinkTemplate[] = [
+    const links: LinkTemplate[] = useMemo(() => [
         { href: '/',           label: t('home')       },
         { href: '/about',      label: t('about')      },
         { href: '/experience', label: t('experience') },
         { href: '/services',   label: t('services')   },
         { href: '/contact',    label: t('contact')    }
-    ];
+    ], [t]);
 
-    const linksRefs: ARef[] = Array.from({ length: links.length }, () => useRef<A>(null));
+    const linksRefs = useRef<ARef[]>([]);
+
+    if (linksRefs.current.length != links.length) {
+        linksRefs.current = links.map(() => createRef<A>())
+    }
 
     useGSAP(() => {
         if (open) linksColumnSlide. in(linksRefs);
@@ -70,14 +74,10 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
                 href={link.href}
                 label={link.label}
                 active={pathname.substring(3) === link.href || isHome}
-                ref={linksRefs[index]}
+                ref={linksRefs.current[index]}
             />
         );
     }
-
-    useEffect(() => {
-    console.log(pathname);
-    }, [pathname]);
 
     return (
         <div className={s.Sidebar} style={{ paddingTop: headerHeight }} ref={sidebar}>
