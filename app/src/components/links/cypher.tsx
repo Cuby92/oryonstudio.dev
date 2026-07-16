@@ -2,11 +2,10 @@
 
 import { LinkProps } from '@/utils/types';
 import { Link } from '@/i18n/navigation';
-import { motion } from 'motion/react';
 import styles from './links.module.scss';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { useRef } from 'react';
-import { A, ARef, Any, AnyRef } from '@/utils/types';
+import { Any, AnyRef } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -17,8 +16,6 @@ const s = styles;
 interface Props extends LinkProps {
     onClick?: () => void;
 }
-
-const MotionLink = motion.create(Link);
 
 function CypherLink({ href, className, onClick, label = 'label', active, ref } : Props) {
     const textRef: AnyRef = useRef<Any>(null);
@@ -56,7 +53,7 @@ function CypherLink({ href, className, onClick, label = 'label', active, ref } :
     const initialText = `~/${ label }${active ? ' █' : ''}`;
 
     return (
-        <MotionLink
+        <Link
             href={href}
             className={`${className} ${s.cypherLink}`}
             onClick={onClick}
@@ -65,7 +62,7 @@ function CypherLink({ href, className, onClick, label = 'label', active, ref } :
             onMouseLeave={handleMouseLeave}
         >
             <span className={s.text} ref={textRef} dangerouslySetInnerHTML={{ __html: initialText }} />
-        </MotionLink>
+        </Link>
     );
 }
 
