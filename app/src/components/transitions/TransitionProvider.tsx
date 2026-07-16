@@ -1,10 +1,11 @@
 'use client';
 
 import { Children, Div, DivRef, H, HRef, Any, AnyRef } from '@/utils/types';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styles from './TransitionProvider.module.scss';
 import { gsap } from 'gsap';
 import { mapArray } from '@/utils/functions';
+import Orion from '@/components/Orion';
 
 import dynamic from 'next/dynamic';
 const TransitionRouter = dynamic(() => import('next-transition-router').then(mod => mod.TransitionRouter), { ssr: false });
@@ -19,6 +20,8 @@ function TransitionProvider({ children }: Children) {
     const blocksRefs: DivRef[] = Array.from({ length: rows }, () => useRef<Div>(null));
     const headingRef: HRef     = useRef<H>(null);
     const wordsRefs:  AnyRef[] = Array.from({ length: rows }, () => useRef<Any>(null));
+    
+    const [orionActive, setOrionActive] = useState<boolean>(false);
 
     const animate: {
         in:  (onComplete: () => void) => gsap.core.Timeline;
@@ -28,6 +31,8 @@ function TransitionProvider({ children }: Children) {
             const tl = gsap.timeline({ onComplete });
             const blocks = mapArray(blocksRefs);
             const words  = mapArray(wordsRefs);
+
+            setOrionActive(true);
 
             tl.set(blocks, {
                 transformOrigin: 'left center',
@@ -60,6 +65,8 @@ function TransitionProvider({ children }: Children) {
             const tl = gsap.timeline({ onComplete });
             const blocks = mapArray(blocksRefs);
             const words  = mapArray(wordsRefs);
+
+            setOrionActive(false);
 
             tl.set(blocks, {
                 transformOrigin: 'right center',
@@ -112,6 +119,9 @@ function TransitionProvider({ children }: Children) {
 
                 <div className={s.branding}>
                     <h1 ref={headingRef}><span className={s.oryon} ref={wordsRefs[0]}>ORYON</span><span className={s.studio} ref={wordsRefs[1]}>STUDIO</span></h1>
+                    <div className={s.orion}>
+                        <Orion active={orionActive} starColor='#333' pathColor='#333' />
+                    </div>
                 </div>
             </div>
             { children }
