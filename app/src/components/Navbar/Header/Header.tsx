@@ -12,11 +12,10 @@ const s = styles;
 
 interface Props {
     setSidebarOpen: (open: boolean) => void,
-    ref: React.RefObject<HTMLElement | null>,
     sidebarOpen: boolean
 }
 
-function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
+function Header({ setSidebarOpen, sidebarOpen } : Props) {
     const [hamburgerState, setHamburgerState] = useState(false);
     const [headerHidden, setHeaderHidden]     = useState(false);
 
@@ -45,24 +44,6 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
     useEffect(() => {
         setSidebarOpen(hamburgerState);
     }, [hamburgerState, setSidebarOpen]);
-
-    const header = ref;
-
-    useGSAP(() => {
-        if (headerHidden) {
-            gsap.to(header.current, {
-                duration: 0.5,
-                y: '-100%',
-                ease: 'power1.in'
-            });
-        } else {
-            gsap.to(header.current, {
-                duration: 0.5,
-                y: 0,
-                ease: 'power1.out'
-            })
-        }
-    }, { dependencies: [headerHidden] });
 
     useEffect(() => {
         let lastScroll = 0;
@@ -178,7 +159,7 @@ function Header({ setSidebarOpen, ref, sidebarOpen } : Props) {
     }, { dependencies: [hamburgerState] });
 
     return (
-        <header className={s.Header} id="Header" ref={ref}>
+        <header className={s.Header} id="Header" style={{ transform: headerHidden ? 'translateY(-100%)' : 'translateY(0)' }}>
             <Link className={s.logo} href='/' onClick={() => setHamburgerState(false)}>
                 <LogoDraw 
                     active={!headerHidden}

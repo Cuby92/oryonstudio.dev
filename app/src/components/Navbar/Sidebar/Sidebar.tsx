@@ -2,25 +2,24 @@
 
 import styles from './Sidebar.module.scss';
 import CypherLink from '@/components/links/cypher';
-import { useRef, createRef, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 import { LinkTemplate } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Div, DivRef } from '@/utils/types';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { A, ARef } from '@/utils/types';
+import { A } from '@/utils/types';
 import { linksColumnSlide } from '@/utils/gsap/animations';
 
 const s = styles;
 
 interface Props {
     open: boolean;
-    headerHeight: number;
     setSidebarOpen: (open: boolean) => void;
 }
 
-function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
+function Sidebar({ open, setSidebarOpen } : Props) {
     const sidebar: DivRef = useRef<Div>(null);
     const pathname = usePathname();
 
@@ -76,7 +75,7 @@ function Sidebar({ open, headerHeight, setSidebarOpen } : Props) {
     }
 
     return (
-        <div className={s.Sidebar} style={{ paddingTop: headerHeight }} ref={sidebar}>
+        <div className={s.Sidebar} ref={sidebar}>
             <nav className={s.Links}>
                 { links.map(link => createLink(link, links.indexOf(link))) }
             </nav>

@@ -10,6 +10,7 @@
     display: flex;
     top: -100%;
     z-index: 999;
+    padding-top: 144px;
 
     .Links {
         @include flexColumn(1rem);
