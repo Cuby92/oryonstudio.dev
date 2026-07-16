@@ -4,7 +4,7 @@ import { LinkProps } from '@/utils/types';
 import { Link } from '@/i18n/navigation';
 import styles from './links.module.scss';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { Any, AnyRef } from '@/utils/types';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -22,6 +22,9 @@ function CypherLink({ href, className, onClick, label = 'label', active, ref } :
 
     const { contextSafe } = useGSAP();
 
+    const initialText = useMemo(() => `~/${ label }${active ? ' █' : ''}`,         [label, active]);
+    const activeText  = useMemo(() => `${label}${active ? ' █ //current' : '=>'}`, [label, active]);
+
     const handleMouseEnter = contextSafe(() => {
         if (!textRef.current) return;
 
@@ -30,7 +33,7 @@ function CypherLink({ href, className, onClick, label = 'label', active, ref } :
         gsap.to(textRef.current, {
             duration: 1,
             scrambleText: {
-                text: `${label}${active ? ' █ //current' : '=>'}`,
+                text: activeText,
                 chars: "ORYONSTUDIO"
             }
         });
@@ -44,24 +47,24 @@ function CypherLink({ href, className, onClick, label = 'label', active, ref } :
         gsap.to(textRef.current, {
             duration: 0.5,
             scrambleText: {
-                text: `~/${label}${active ? ' █' : ''}`,
+                text: activeText,
                 chars: "oryonstudio"
             }
         });
     });
 
-    const initialText = `~/${ label }${active ? ' █' : ''}`;
-
     return (
         <Link
             href={href}
-            className={`${className} ${s.cypherLink}`}
+            className={`${className || ''} ${s.cypherLink}`}
             onClick={onClick}
             ref={ref}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <span className={s.text} ref={textRef} dangerouslySetInnerHTML={{ __html: initialText }} />
+            <span className={s.text} ref={textRef}>
+                { initialText }
+            </span>
         </Link>
     );
 }
