@@ -21,3 +21,34 @@ root {
         min-height: 100lvh;
     }
 }
+
+@layer main {
+    html {
+        $trackColor: #333;
+        $thumbColor: #22f;
+        $thumbHoverColor: #55f;
+
+        scrollbar-width: thin;
+        scrollbar-color: $thumbColor $trackColor;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: $trackColor;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $thumbColor;
+            border-radius: 10px;
+            border: 2px solid $trackColor;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: $thumbHoverColor;
+        }
+    }
+}
