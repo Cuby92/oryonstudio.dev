@@ -8,73 +8,74 @@ interface Props {
     active?:    boolean
 }
 
+const longPathDrawAnimation = {
+    hidden: {
+        pathLength: 0,
+        opacity: 0
+    },
+    visible: {
+        pathLength: 1,
+        opacity: 1,
+
+        transition: {
+            pathLength: {
+                duration: 1,
+                delay: 1
+            },
+            opacity: {
+                duration: 0.5,
+                delay: 0.75
+            }
+        }
+    }
+}
+
+const shortPathDrawAnimation = {
+    hidden: {
+        pathLength: 0,
+        opacity: 0
+    },
+    visible: {
+        pathLength: 1,
+        opacity: 1,
+
+        transition: {
+            pathLength: {
+                duration: 0.5,
+                delay: 1
+            },
+            opacity: {
+                duration: 0.2,
+                delay: 0.9
+            }
+        }
+    }
+}
+
+const starsAnimation = {
+    hidden: {
+        r: 0,
+        opacity: 0
+    },
+    visible: {
+        r: 2,
+        opacity: 1,
+        
+        transition: {
+            r: {
+                duration: 0.5,
+                delay: 0.5
+            },
+            opacity: {
+                duration: 0.2,
+                delay: 0.25
+            }
+        }
+    }
+}
+
+
 function Orion({ pathColor = '#116eff', starColor = '#c6c9ff', active = true }: Props) {
-    const longPathDrawAnimation = {
-        hidden: {
-            pathLength: 0,
-            opacity: 0
-        },
-        visible: {
-            pathLength: 1,
-            opacity: 1,
-
-            transition: {
-                pathLength: {
-                    duration: 1,
-                    delay: 1
-                },
-                opacity: {
-                    duration: 0.5,
-                    delay: 0.75
-                }
-            }
-        }
-    }
-
-    const shortPathDrawAnimation = {
-        hidden: {
-            pathLength: 0,
-            opacity: 0
-        },
-        visible: {
-            pathLength: 1,
-            opacity: 1,
-
-            transition: {
-                pathLength: {
-                    duration: 0.5,
-                    delay: 1
-                },
-                opacity: {
-                    duration: 0.2,
-                    delay: 0.9
-                }
-            }
-        }
-    }
-
-    const starsAnimation = {
-        hidden: {
-            r: 0,
-            opacity: 0
-        },
-        visible: {
-            r: 2,
-            opacity: 1,
-            
-            transition: {
-                r: {
-                    duration: 0.5,
-                    delay: 0.5
-                },
-                opacity: {
-                    duration: 0.2,
-                    delay: 0.25
-                }
-            }
-        }
-    }
-
     return (
         <svg
             width="100%"
