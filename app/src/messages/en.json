@@ -6,6 +6,14 @@
             "contact": "contact_us",
             "experience": "our_experience",
             "services": "our_services"
+        },
+        "footer": {
+            "humanTouch": {
+                "designed_and_engineered_by": "Designed and engineered by",
+                "jakub_barczynski": "Jakub Barczyński",
+                "powered_by_nextjs": "Powered by Next.js."
+            },
+            "copyright": "© 2026 ORYON STUDIO. All rights reserved."
         }
     },
 
