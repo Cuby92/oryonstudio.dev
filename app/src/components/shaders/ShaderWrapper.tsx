@@ -1,6 +1,5 @@
 'use client';
 
-import { DeviceSpecs } from '@/utils/types';
 import { useDeviceSpecs } from '@/utils/functions';
 import { useState, useEffect } from 'react';
 
@@ -16,8 +15,8 @@ interface Props {
 }
 
 function ShaderWrapper({ children, width = '110vw', height = '110vh', style = {}, center = true }: Props) {
-    const [specs, setSpecs]     = useState<DeviceSpecs>(useDeviceSpecs());
     const [mounted, setMounted] = useState<boolean>(false);
+    const specs = useDeviceSpecs();
 
     useEffect(() => {
         setMounted(true);
