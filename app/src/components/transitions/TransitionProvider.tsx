@@ -1,10 +1,9 @@
 'use client';
 
-import { Children, Div, DivRef, H, HRef, Any, AnyRef } from '@/utils/types';
-import { useRef, useState, useMemo } from 'react';
+import { Children, Div, H, Any } from '@/utils/types';
+import { useRef, useState } from 'react';
 import styles from './TransitionProvider.module.scss';
 import { gsap } from 'gsap';
-import { mapArray } from '@/utils/functions';
 import Orion from '@/components/Orion';
 
 import dynamic from 'next/dynamic';
@@ -47,7 +46,7 @@ function TransitionProvider({ children }: Children) {
                 y: '100%'
             });
 
-            blocks.forEach((block) => {
+            blocks.forEach(block => {
                 tl.to(block, {
                     scaleX: 1,
                     duration: 1,
@@ -91,7 +90,7 @@ function TransitionProvider({ children }: Children) {
                 ease: 'power1.out'
             });
 
-            blocks.forEach((block) => {
+            blocks.forEach(block => {
                 tl.to(block, {
                     scaleX: 0,
                     duration: 1,
