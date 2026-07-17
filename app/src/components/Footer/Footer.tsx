@@ -32,8 +32,10 @@ function Footer() {
                 { links.map(link => <CypherLink className={s.link} label={link.label} href={link.href} key={links.indexOf(link)} />)}
             </nav>
 
-            <p className={s.techStack}>{ t('footer.humanTouch.designed_and_engineered_by') } <a target='_blank'>{ t('footer.humanTouch.powered_by_nextjs') }</a></p>
-            <p className={s.copyright}>{ t('footer.copyright') }</p>
+            <div className={s.bottom}>
+                <p className={s.techStack}>{ t('footer.humanTouch.designed_and_engineered_by') } <a target='_blank'>{ t('footer.humanTouch.jakub_barczynski') }</a>. { t('footer.humanTouch.powered_by_nextjs') }</p>
+                <p className={s.copyright}>{ t('footer.copyright') }</p>
+            </div>
         </footer>
     );
 }
