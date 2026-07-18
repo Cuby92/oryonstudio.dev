@@ -53,11 +53,15 @@
             }
         }
 
+
         .divider {
+            height: 11rem;
             width: 2px;
-            height: 15rem;
             background: white;
-            margin-block: auto;
+            margin-top: auto;
+            transition: 
+                height 0.5s ease-out,
+                margin-bottom 1s ease-in;
         }
 
         nav {

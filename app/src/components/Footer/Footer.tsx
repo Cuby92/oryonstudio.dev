@@ -12,7 +12,8 @@ import { El } from '@/utils/types';
 const s = styles;
 
 function Footer() {
-    const [logoRef, isLogoFullyVisible] = useIsFullyVisible<HTMLAnchorElement>();
+    const [logoRef,    isLogoFullyVisible]    = useIsFullyVisible<HTMLAnchorElement>();
+    const [dividerRef, isDividerFullyVisible] = useIsFullyVisible<HTMLDivElement>();
 
     const t = useTranslations('global');
 
@@ -40,10 +41,10 @@ function Footer() {
                     <p className={s.availability}><span className={s.indicator}></span>{ t('availability') }</p>
                 </div>
 
-                <div className={s.divider} />
+                <div className={s.divider} ref={dividerRef} style={{ height: isDividerFullyVisible ? '11rem' : 0, marginBottom: isDividerFullyVisible ? 'auto' : 0 }} />
 
                 <nav>
-                    { links.map(link => <CypherLink className={s.link} label={link.label} href={link.href} key={links.indexOf(link)} />)}
+                    { links.map(link => <CypherLink className={s.link} label={link.label} href={link.href} key={links.indexOf(link)} />) }
                 </nav>
             </section>
 
