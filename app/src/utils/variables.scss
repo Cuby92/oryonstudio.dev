@@ -1,3 +1,4 @@
+// A L I G N
 @mixin gridAlign($horizontally: center, $vertically: center, $text: left) {
     align-self: $vertically;
     justify-self: $horizontally;
@@ -17,6 +18,8 @@
     gap: $gap;
 }
 
+
+// M A S K
 @mixin maskImage($image, $color, $size: 2rem, $aspectRatio: 1) {
     height: $size;
     aspect-ratio: $aspectRatio;
@@ -33,6 +36,8 @@
     margin-top: calc(-0.15 * $size);
 }
 
+
+// A N I M A T I O N S
 @mixin blink($time: 1s) {
     animation: blink $time infinite;
 }
@@ -51,10 +56,21 @@
     }
 }
 
+
+// C O L O R S
 $electricBlue: #00f;
 $cobaltBlue:   #0a21ff;
 $mutedGray:    #8e919a;
 
+
+// F O N T S
 $raleway:        var(--raleway);
 $poppins:        var(--poppins);
 $googleCode:     var(--googleCode);
+
+
+// A V A I L A B I L I T Y
+$availability: $available;
+
+$available: #0f0;
+$unavailable: #f00;
