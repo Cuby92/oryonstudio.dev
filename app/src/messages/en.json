@@ -6,7 +6,17 @@
             "contact": "contact_us",
             "experience": "our_experience",
             "services": "our_services"
-        }
+        },
+        "footer": {
+            "humanTouch": {
+                "designed_and_engineered_by": "Designed and engineered in Poland by",
+                "jakub_barczynski": "Jakub Barczyński",
+                "powered_by_nextjs": "Powered by Next.js."
+            },
+            "copyright": "© 2026 ORYON STUDIO. All rights reserved."
+        },
+        "slogan": "The cosmic standard for standout brands.",
+        "availability": "Available for select Q3/Q4 projects."
     },
 
     "home": {

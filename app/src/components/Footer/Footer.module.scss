@@ -2,18 +2,90 @@
 
 .Footer {
     width: 100%;
-    background-color: $electricBlue;
-    padding: 2rem;
     box-sizing: border-box;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
 
-    nav {
+    .MainSection {
         display: flex;
-        justify-content: space-around;
         flex-wrap: wrap;
-        gap: 1rem;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        $columnPadding: 2rem;
 
-        .link {
+        .info, nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: calc(50% - 1px - $columnPadding * 2);
+            padding: 1rem $columnPadding;
+            align-items: start;
+        }
+
+        .info {
+            .logo {
+                height: 7rem;
+            }
+
+            .slogan {
+                font-size: 1.2rem;
+                font-family: $raleway;
+                font-weight: 400;
+                margin: 0.5rem 0 0 0;
+            }
+
+            .availability {
+                margin: 0;
+                font-family: $raleway;
+                margin-top: 2rem;
+
+                .indicator {
+                    width: 0.6rem;
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                    background: $availability;
+                    display: inline-block;
+                    margin: auto 0.3rem;
+                }
+            }
+        }
+
+        .divider {
+            width: 2px;
+            height: 15rem;
+            background: white;
+            margin-block: auto;
+        }
+
+        nav {
             text-align: center;
+            gap: 0.5rem;
+
+            .link {
+                width: 100%;
+            }
+        }
+    }
+
+    .bottom {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+        .humanTouch {
+            margin: 0 0 0.5rem 0;
+            font-family: $raleway;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            font-weight: 100;
+            line-height: 0.9rem;
+            margin: 0;
         }
     }
 }
