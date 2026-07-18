@@ -1,13 +1,19 @@
+'use client';
+
 import styles from "./Footer.module.scss";
 import { LinkTemplate } from '@/utils/types';
 import CypherLink from '@/components/links/cypher';
 import { useTranslations } from 'next-intl';
 import LogoDraw from "@/components/LogoDraw";
 import Link from 'next/link';
+import { useIsFullyVisible } from "@/utils/functions";
+import { El } from '@/utils/types';
 
 const s = styles;
 
 function Footer() {
+    const [logoRef, isLogoFullyVisible] = useIsFullyVisible<HTMLAnchorElement>();
+
     const t = useTranslations('global');
 
     const links: LinkTemplate[] = [
@@ -22,8 +28,13 @@ function Footer() {
         <footer className={s.Footer}>
             <section className={s.MainSection}>
                 <div className={s.info}>
-                    <Link href="/" className={s.logo}>
-                        <LogoDraw active={true} color="white" />
+                    <Link href="/" className={s.logo} ref={logoRef}>
+                        <LogoDraw 
+                            active={isLogoFullyVisible}
+                            color="#ffff"
+                            duration={2}
+                            delay={0.1}
+                        />
                     </Link>
                     <p className={s.slogan}>{ t('slogan')}</p>
                     <p className={s.availability}><span className={s.indicator}></span>{ t('availability') }</p>
