@@ -76,6 +76,11 @@
         width: 100%;
         align-items: center;
 
+        .humanTouch, .copyright {
+            width: 100%;
+            text-align: center;
+        }
+
         .humanTouch {
             margin: 0 0 0.5rem 0;
             font-family: $raleway;
