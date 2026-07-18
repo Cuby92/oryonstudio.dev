@@ -25,7 +25,7 @@ function Footer() {
                     <Link href="/" className={s.logo}>
                         <LogoDraw active={true} color="white" />
                     </Link>
-                    <p className={s.slogan}>The cosmic standard for standout brands.</p>
+                    <p className={s.slogan}>{ t('slogan')}</p>
                     <p className={s.availability}><span className={s.indicator}></span>Available for select Q3/Q4 projects.</p>
                 </div>
 
