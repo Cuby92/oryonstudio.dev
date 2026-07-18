@@ -26,7 +26,7 @@ function Footer() {
                         <LogoDraw active={true} color="white" />
                     </Link>
                     <p className={s.slogan}>{ t('slogan')}</p>
-                    <p className={s.availability}><span className={s.indicator}></span>Available for select Q3/Q4 projects.</p>
+                    <p className={s.availability}><span className={s.indicator}></span>{ t('availability') }</p>
                 </div>
 
                 <div className={s.divider} />
