@@ -140,21 +140,45 @@ export const magneticPull: GSAPAnimation.SplitText = {
     }
 }
 
-export const spiralIn: GSAPAnimation<Ref<El.Text>> = (text, options) => {
-    const target = filterNulls(text);
-    const splitText = SplitText.create(target, { type: 'chars' });
+export const spiralIn: GSAPAnimation.SplitText = {
+    prepare: (text) => {
+        const target = filterNulls(text);
 
-    return gsap.from(splitText.chars, {
-        x: (i) => Math.cos(i) * 100,
-        y: (i) => Math.sin(i) * 100,
-        rotation: 360,
-        scale: 0,
-        opacity: 0,
-        stagger: 0.04,
-        duration: 0.8,
-        ease: 'power3.out',
-        ...options
-    });
+        const splitText = SplitText.create(target, { type: "chars" });
+
+        gsap.set(splitText.chars, { 
+            x: () => gsap.utils.random(-200, 200),
+            y: () => gsap.utils.random(-200, 200),
+            opacity: 0,
+            rotation: () => gsap.utils.random(-90, 90)
+        });
+
+        return splitText;
+    },
+    animate: (text, options) => {
+
+        const tl = gsap.timeline();
+
+        tl.fromTo(text.chars, {
+            x: (i) => Math.cos(i) * 100,
+            y: (i) => Math.sin(i) * 100,
+            rotation: 360,
+            scale: 0,
+            opacity: 0,
+        }, {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            rotation: 0,
+            scale: 1,
+            stagger: 0.04,
+            duration: 0.8,
+            ease: 'power3.out',
+            ...options
+        });
+
+        return tl;
+    }
 }
 
 export const fadeUpWords: GSAPAnimation = (text, options) => {
