@@ -6,15 +6,24 @@ import CypherLink from '@/components/links/cypher';
 import { useTranslations } from 'next-intl';
 import LogoDraw from "@/components/LogoDraw";
 import Link from 'next/link';
-import { useIsFullyVisible } from "@/utils/functions";
+import { useIsVisible } from "@/utils/functions";
+import { useRef } from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { El } from '@/utils/types';
+import { charsSlideIn, magneticPull } from '@/utils/gsap/animations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const s = styles;
 
 function Footer() {
-    const [logoRef,    isLogoFullyVisible]    = useIsFullyVisible<HTMLAnchorElement>();
-    const [dividerRef, isDividerFullyVisible] = useIsFullyVisible<HTMLDivElement>();
-
+    const [footer, isFooterFullyVisible] = useIsVisible(0.75);
+    const slogan = useRef<El.P>(null);
+    const availability = useRef<El.P>(null);
+    const linksRef = useRef(new Map());
+    
     const t = useTranslations('global');
 
     const links: LinkTemplate[] = [
@@ -25,26 +34,64 @@ function Footer() {
         { href: '/contact',    label: t('links.contact')    }
     ];
 
+    useGSAP(() => {
+        if (typeof window == 'undefined') return;
+        if (!slogan.current || !availability.current) return;
+
+        const prepareTl = gsap.timeline();
+
+        const [prepareSlogan, splitSlogan] = charsSlideIn.prepare(slogan);
+        const [prepareAvailability, splitAvailability] = charsSlideIn.prepare(availability);
+
+        prepareTl.add(prepareSlogan);
+        prepareTl.add(prepareAvailability);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: footer.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(charsSlideIn.animate(splitSlogan));
+        tl.add(charsSlideIn.animate(splitAvailability), "<0.5");
+    });
+
     return (
-        <footer className={s.Footer}>
+        <footer className={s.Footer} ref={footer}>
             <section className={s.MainSection}>
                 <div className={s.info}>
-                    <Link href="/" className={s.logo} ref={logoRef}>
+                    <Link href="/" className={s.logo}>
                         <LogoDraw 
-                            active={isLogoFullyVisible}
+                            active={isFooterFullyVisible}
                             color="#ffff"
                             duration={2}
                             delay={0.1}
                         />
                     </Link>
-                    <p className={s.slogan}>{ t('slogan')}</p>
-                    <p className={s.availability}><span className={s.indicator}></span>{ t('availability') }</p>
+                    <p className={s.slogan} ref={slogan} dangerouslySetInnerHTML={{ __html: t('slogan') }}></p>
+                    <p className={s.availability}><span className={s.indicator}></span><span className={s.text} ref={availability} dangerouslySetInnerHTML={{ __html: t('availability') }}></span></p>
                 </div>
 
-                <div className={s.divider} ref={dividerRef} style={{ height: isDividerFullyVisible ? '11rem' : 0, marginBottom: isDividerFullyVisible ? 'auto' : 0 }} />
+                <div className={s.divider} />
 
                 <nav>
-                    { links.map(link => <CypherLink className={s.link} label={link.label} href={link.href} key={links.indexOf(link)} />) }
+                    { links.map(link => (
+                        <CypherLink 
+                            className={s.link}
+                            label={link.label}
+                            href={link.href}
+                            key={links.indexOf(link)}
+                            ref={ (el) => {
+                                if (el) {
+                                    linksRef.current.set(links.indexOf(link), el);
+                                } else {
+                                    linksRef.current.delete(links.indexOf(link));
+                                }
+                            } }
+                        />
+                    )) }
                 </nav>
             </section>
 

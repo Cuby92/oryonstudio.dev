@@ -41,6 +41,8 @@
                 margin: 0;
                 font-family: $raleway;
                 margin-top: 2rem;
+                display: flex;
+                align-items: center;
 
                 .indicator {
                     width: 0.6rem;
@@ -50,6 +52,11 @@
                     display: inline-block;
                     margin: auto 0.3rem;
                 }
+
+                .text {
+                    overflow: hidden;
+                    display: block;
+                }
             }
         }
 
@@ -58,10 +65,7 @@
             height: 11rem;
             width: 2px;
             background: white;
-            margin-top: auto;
-            transition: 
-                height 0.5s ease-out,
-                margin-bottom 1s ease-in;
+            margin-block: auto;
         }
 
         nav {
