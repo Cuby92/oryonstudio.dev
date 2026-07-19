@@ -45,12 +45,10 @@ export const charsSlideIn: GSAPAnimation.SplitText = {
 
         const splitText = SplitText.create(target, { type: "chars" });
 
-        const tl = gsap.timeline();
-
         gsap.set(target, { overflow: 'hidden' });
         gsap.set(splitText.chars, { y: '100%' });
 
-        return [tl, splitText];
+        return splitText;
     },
     animate: (text, options) => {
 

@@ -38,13 +38,8 @@ function Footer() {
         if (typeof window == 'undefined') return;
         if (!slogan.current || !availability.current) return;
 
-        const prepareTl = gsap.timeline();
-
-        const [prepareSlogan, splitSlogan] = charsSlideIn.prepare(slogan);
-        const [prepareAvailability, splitAvailability] = charsSlideIn.prepare(availability);
-
-        prepareTl.add(prepareSlogan);
-        prepareTl.add(prepareAvailability);
+        const splitSlogan = charsSlideIn.prepare(slogan);
+        const splitAvailability = charsSlideIn.prepare(availability);
 
         const tl = gsap.timeline({
             scrollTrigger: {

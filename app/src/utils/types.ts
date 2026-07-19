@@ -57,7 +57,7 @@ export namespace GSAPAnimation {
         export type Prepare = (
             el: Ref<El.Text | null> | Ref<El.Text | null>[],
             options?: gsap.TweenVars
-        ) => [gsap.core.Tween | gsap.core.Timeline, SplitTextInstance];
+        ) => SplitTextInstance;
 
         export type Animate = (
             text: SplitTextInstance,
