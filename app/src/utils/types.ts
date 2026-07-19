@@ -1,44 +1,38 @@
+import { SplitText as SplitTextInstance } from 'gsap/all';
+import _SplitText from 'gsap/SplitText';
+
+gsap.registerPlugin(SplitTextInstance);
+
 // E L E M E N T S
-export type El<T extends HTMLElement = HTMLElement> = T | null;
+export type El<T extends HTMLElement = HTMLElement> = HTMLElement;
 
 export namespace El {
-  export type H    = HTMLHeadingElement   | null;
-  export type P    = HTMLParagraphElement | null;
-  export type Li   = HTMLLIElement        | null;
-  export type Text = HTMLHeadingElement   | HTMLParagraphElement | HTMLLIElement | null;
+  export type H    = HTMLHeadingElement;
+  export type P    = HTMLParagraphElement;
+  export type Li   = HTMLLIElement;
+  export type Span = HTMLSpanElement;
+  export type Text = HTMLHeadingElement | HTMLParagraphElement | HTMLLIElement | HTMLSpanElement;
 
-  export type Btn  = HTMLButtonElement    | null;
-  export type Div  = HTMLDivElement       | null;
-  export type A    = HTMLAnchorElement    | null;
+  export type Btn  = HTMLButtonElement;
+  export type Div  = HTMLDivElement;
+  export type A    = HTMLAnchorElement;
 }
 
 // R E F S
-export type Ref<T extends HTMLElement = HTMLElement> = React.RefObject<any>;
-
-export namespace Ref {
-  export type H    = React.RefObject<El.H>;
-  export type P    = React.RefObject<El.P>;
-  export type Li   = React.RefObject<El.Li>;
-  export type Text = React.RefObject<El.Text>;
-
-  export type Btn  = React.RefObject<HTMLButtonElement    | null>;
-  export type Div  = React.RefObject<HTMLDivElement       | null>;
-  export type A    = React.RefObject<HTMLAnchorElement    | null>;
-}
+export type Ref<T extends HTMLElement | null = HTMLElement | null> = React.RefObject<T>;
 
 // I N T E R F A C E S
 export interface Children {
-    children: Readonly<React.ReactNode>;
+    children?: Readonly<React.ReactNode>;
 }
 
-export interface LinkProps {
+export interface LinkProps extends Children {
     href:       string,
-    children?:  React.ReactNode,
     className?: string,
     active?:    boolean,
     visited?:   boolean,
     label?:     string,
-    ref?:       React.RefObject<El.A>
+    ref?:       React.Ref<El.A>
 }
 
 export interface LinkTemplate {
@@ -52,5 +46,28 @@ export interface DeviceSpecs {
     mounted:        boolean
 }
 
-// G S A P   A N I M A T I O N   T Y P E
-export type GSAPAnimation<T extends Ref<any> = Ref<any>> = (el: T | T[], options?: gsap.TweenVars) => gsap.core.Tween | gsap.core.Timeline;
+// G S A P   A N I M A T I O N   T Y P E S
+export type GSAPAnimation<T extends Ref<any> = Ref<any>> = (
+    el: T | T[],
+    options?: gsap.TweenVars
+) => gsap.core.Tween | gsap.core.Timeline;
+
+export namespace GSAPAnimation {
+    export namespace SplitText {
+        export type Prepare = (
+            el: Ref<El.Text | null> | Ref<El.Text | null>[],
+            options?: gsap.TweenVars
+        ) => [gsap.core.Tween | gsap.core.Timeline, SplitTextInstance];
+
+        export type Animate = (
+            text: SplitTextInstance,
+            options?: gsap.TweenVars
+        ) => gsap.core.Tween | gsap.core.Timeline;
+    }
+
+    export type SplitText = {
+        prepare: SplitText.Prepare;
+        animate: SplitText.Animate;
+    }
+}
+
