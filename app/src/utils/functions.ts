@@ -21,10 +21,21 @@ export function filterElement(element?: React.RefObject<HTMLElement | null>) {
 }
 
 export function filterNulls(target: Ref[] | Ref) {
-    const array = Array.isArray(target) ? target : [target];
-    return array
-        .map(el => el.current)
-        .filter((el): el is NonNullable<typeof el> => el !== null);
+    if (!target) return [];
+
+    if (!Array.isArray(target)) {
+        if ('current' in target) {
+            return target.current ? [target.current] : [];
+        }
+        return target;
+    }
+
+    return target
+        .map(item => {
+            if (!item) return null;
+            return 'current' in item ? item.current : item;
+        })
+        .filter((el): el is HTMLElement => el !== null);
 }
 
 

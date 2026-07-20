@@ -23,6 +23,7 @@
             width: calc(50% - 1px - $columnPadding * 2);
             padding: 1rem $columnPadding;
             align-items: center;
+            box-sizing: border-box;
         }
 
         .info {
@@ -82,12 +83,17 @@
             align-items: center;
             justify-content: center;
 
-            .info {
+            .info, nav {
                 text-align: center;
+                width: 100%;
             }
 
             .divider {
                 display: none;
+            }
+
+            nav .link {
+                text-align: center;
             }
         }
     }

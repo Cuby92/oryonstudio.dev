@@ -36,7 +36,7 @@ function Footer() {
 
     useGSAP(() => {
         if (typeof window == 'undefined') return;
-        if (!slogan.current || !availability.current) return;
+        if (!footer.current || !slogan.current || !availability.current) return;
 
         const splitSlogan = magneticPull.prepare(slogan);
         const splitAvailability = charsSlideIn.prepare(availability);
