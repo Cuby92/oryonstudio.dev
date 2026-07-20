@@ -1,7 +1,7 @@
 import { gsap, CSSPlugin } from 'gsap';
 import { convertElements } from '@/utils/functions';
 import { SplitText } from 'gsap/all';
-import type { El, Ref, GSAPAnimation } from '@/utils/types';
+import type { El, GSAPAnimation } from '@/utils/types';
 
 gsap.registerPlugin(SplitText, CSSPlugin);
 
@@ -57,9 +57,8 @@ export const skewIn: GSAPAnimation<El> = (el, options) => {
 
 export const revealWipe: GSAPAnimation<El.Text> = (text, options) => {
     const target = convertElements(text);
-    const splitText = SplitText.create(target, { type: 'chars' });
 
-    return gsap.from(splitText.chars, {
+    return gsap.from(target, {
         clipPath: 'inset(0 100% 0 0)',
         duration: 1.2,
         ease: 'power3.inOut',
