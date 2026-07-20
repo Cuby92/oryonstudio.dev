@@ -1,5 +1,5 @@
 import { gsap, CSSPlugin } from 'gsap';
-import { filterNulls } from '@/utils/functions';
+import { convertElements } from '@/utils/functions';
 import { SplitText } from 'gsap/all';
 import type { El, Ref, GSAPAnimation } from '@/utils/types';
 
@@ -10,7 +10,7 @@ export const linksColumnSlide: {
     out: GSAPAnimation;
 } = {
     in: (elements, options) => {
-        const targets = filterNulls(elements);
+        const targets = convertElements(elements);
         return gsap.fromTo(targets, {
             x: index => index % 2 == 0 ? 50 : -50,
             opacity: 0
@@ -24,7 +24,7 @@ export const linksColumnSlide: {
         });
     },
     out: (elements, options) => {
-        const targets = filterNulls(elements);
+        const targets = convertElements(elements);
         return gsap.fromTo(targets, {
             x: 0,
             opacity: 1,
@@ -39,8 +39,8 @@ export const linksColumnSlide: {
     }
 }
 
-export const skewIn: GSAPAnimation<Ref> = (el, options) => {
-    const target = filterNulls(el);
+export const skewIn: GSAPAnimation<El> = (el, options) => {
+    const target = convertElements(el);
 
     const tween = gsap.from(target, {
         skewX: 30,
@@ -55,8 +55,8 @@ export const skewIn: GSAPAnimation<Ref> = (el, options) => {
     return tween;
 }
 
-export const revealWipe: GSAPAnimation<Ref<El.Text>> = (text, options) => {
-    const target = filterNulls(text);
+export const revealWipe: GSAPAnimation<El.Text> = (text, options) => {
+    const target = convertElements(text);
     const splitText = SplitText.create(target, { type: 'chars' });
 
     return gsap.from(splitText.chars, {
@@ -70,7 +70,7 @@ export const revealWipe: GSAPAnimation<Ref<El.Text>> = (text, options) => {
 // S P L I T   T E X T   A N I M A T I O N S
 export const charsSlideIn: GSAPAnimation.SplitText = {
     prepare: (text) => {
-        const target = filterNulls(text);
+        const target = convertElements(text);
 
         const splitText = SplitText.create(target, { type: "chars" });
 
@@ -103,7 +103,7 @@ export const charsSlideIn: GSAPAnimation.SplitText = {
 
 export const magneticPull: GSAPAnimation.SplitText = {
     prepare: (text) => {
-        const target = filterNulls(text);
+        const target = convertElements(text);
 
         const splitText = SplitText.create(target, { type: "chars" });
 
@@ -142,7 +142,7 @@ export const magneticPull: GSAPAnimation.SplitText = {
 
 export const spiralIn: GSAPAnimation.SplitText = {
     prepare: (text) => {
-        const target = filterNulls(text);
+        const target = convertElements(text);
 
         const splitText = SplitText.create(target, { type: "chars" });
 
@@ -182,7 +182,7 @@ export const spiralIn: GSAPAnimation.SplitText = {
 }
 
 export const fadeUpWords: GSAPAnimation = (text, options) => {
-    const target = filterNulls(text);
+    const target = convertElements(text);
     const splitText = SplitText.create(target, { type: 'words' });
 
     return gsap.from(splitText.words, {
@@ -197,7 +197,7 @@ export const fadeUpWords: GSAPAnimation = (text, options) => {
 
 // D I V I D E R   A N I M A T I O N
 export const drawDivider: GSAPAnimation = (target, options) => {
-    const divider = filterNulls(target);
+    const divider = convertElements(target);
 
     return gsap.from(divider, {
         height: 0,
