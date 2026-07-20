@@ -2,40 +2,64 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { DeviceSpecs } from '@/utils/types';
-import { Ref, El } from './types';
+import { Ref, El, Elements } from './types';
 
 
-// E L E M E N T S   F I L T E R I N G
-export function mapArray(array?: React.RefObject<HTMLElement | null>[]) {
-    return array
-        ?.map(item => item.current)
-        .filter((item): item is HTMLElement => item !== null) ?? [];
+// E L E M E N T S   C O N V E R S I O N
+/**
+ * Checks if the item is a valid HTMLElement
+ * @param item any
+ * @returns boolean
+ */
+export function isHTMLElement(item: any): item is HTMLElement {
+    return item != null && typeof item === 'object' && 'nodeType' in item;
 }
 
-export function filterElement(element?: React.RefObject<HTMLElement | null>) {
-    if (element != null) {
-        return element.current;
-    } else {
-        return [];
-    }
+export function isRef(item: any): item is React.RefObject<any> {
+    return typeof item === 'object' && 'current' in item;
 }
 
-export function filterNulls(target: Ref[] | Ref) {
-    if (!target) return [];
+/**
+ * Converts the elements to a uniform formula which is an array of DOM elements; also filters nulls if present
+ * @param el element, ref or array of refs/elements
+ * @returns HTMLElement[]
+ */
+export function convertElements(el: Elements): HTMLElement[] {
+    if (!el) return [];
 
-    if (!Array.isArray(target)) {
-        if ('current' in target) {
-            return target.current ? [target.current] : [];
+    // Case 1: Ref object (Ref<any>)
+    if (isRef(el)) {
+        const current = el.current;
+        if (!current) return [];
+
+        // Case 1a: .current is an array (Ref<T[]>)
+        if (Array.isArray(current)) {
+            return current
+                .map(item => {
+                    if (!item) return null;
+                    if (isRef(item)) return item.current;
+                    else return item;
+                })
+                .filter(isHTMLElement);
         }
-        return target;
+
+        // Case 1b: .current is a single element
+        else return isHTMLElement(current) ? [current] : [];
     }
 
-    return target
-        .map(item => {
-            if (!item) return null;
-            return 'current' in item ? item.current : item;
-        })
-        .filter((el): el is HTMLElement => el !== null);
+    // Case 2: direct array (Ref<T>[])
+    if (Array.isArray(el)) {
+        return el
+            .map(item => {
+                if (!item) return null;
+                if (typeof item === 'object' && 'current' in item) return item.current;
+                return item;
+            })
+            .filter(isHTMLElement);
+    }
+
+    // Case 3: single raw HTMLElement or invalid element
+    else return isHTMLElement(el) ? [el] : [];
 }
 
 
