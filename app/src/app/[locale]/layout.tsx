@@ -8,6 +8,7 @@ import { getMessages } from 'next-intl/server';
 import { MetadataParams } from '@/i18n/types';
 import { readMetadata, checkLocale } from '@/i18n/functions';
 import { routing } from '@/i18n/routing';
+import LoadingPage from '@/components/loading/LoadingPage';
 
 import dynamic from 'next/dynamic';
 const Navbar             = dynamic(() => import('@/components/Navbar/Navbar'));
@@ -49,12 +50,14 @@ async function RootLayout({ children, params }: { children: React.ReactNode; par
   return (
     <html lang={locale} className={`${raleway.variable} ${poppins.variable} ${googleCode.variable}`}>
       <body>
-        <NextIntlClientProvider messages={messages}>
-          <TransitionProvider>
-            <Navbar />
-            {children}
-          </TransitionProvider>
-        </NextIntlClientProvider>
+        <LoadingPage>
+          <NextIntlClientProvider messages={messages}>
+            <TransitionProvider>
+              <Navbar />
+              {children}
+            </TransitionProvider>
+          </NextIntlClientProvider>
+        </LoadingPage>
         <SpeedInsights />
         <Analytics />
       </body>
