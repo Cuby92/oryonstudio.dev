@@ -337,19 +337,79 @@ export const spiralIn: GSAPAnimation.SplitText = {
     }
 } satisfies GSAPAnimation.SplitText;
 
-export const fadeUpWords: GSAPAnimation = (text, options) => {
-    const target = convertElements(text);
-    const splitText = SplitText.create(target, { type: 'words' });
+export const fadeUpWords: GSAPAnimation.SplitText = {
+    /**
+     * Prepares the target element for the fadeUpWords animation by splitting the text and setting initial values.
+     * @param text - target element of type El.Text
+     * @returns SplitText instance
+     * @example
+     * ```ts
+     * const splitText = fadeUpWords.prepare(text);
 
-    return gsap.from(splitText.words, {
-        y: 40,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power2.out',
-        ...options
-    });
-}
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(fadeUpWords.animate(splitText));
+        * ```
+    */
+    prepare: (text, options?) => {
+        const target = convertElements(text);
+
+        const splitText = SplitText.create(target, { type: "words" });
+
+        gsap.set(splitText.chars, { 
+            y: 40,
+            opacity: 0,
+            ...options
+        });
+
+        return splitText;
+    },
+
+    /**
+     * Reusable GSAP word-level fade-up animation.
+     * Use after `.prepare()`
+     * @param text - target element returned by `.prepare()`
+     * @returns `gsap.core.Timeline`
+     * @example
+     * ```ts
+     * const splitText = fadeUpWords.prepare(text);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container.current,
+                start: '90% bottom'
+            },
+            delay: 0.1
+        });
+
+        tl.add(fadeUpWords.animate(splitText));
+     * ```
+    */
+    animate: (text, options?) => {
+
+        const tl = gsap.timeline();
+
+        tl.fromTo(text.words, {
+            opacity: 0,
+            y: 40
+        }, {
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: 'power2.out',
+            ...options
+        });
+
+        return tl;
+    }
+} satisfies GSAPAnimation.SplitText;
 
 // D I V I D E R   A N I M A T I O N
 export const drawDivider: GSAPAnimation = (target, options) => {

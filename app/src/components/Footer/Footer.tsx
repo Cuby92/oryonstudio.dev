@@ -12,7 +12,7 @@ import { gsap } from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { El } from '@/utils/types';
-import { charsSlideIn, magneticPull, drawDivider, revealWipe } from '@/utils/gsap/animations';
+import { charsSlideIn, magneticPull, drawDivider, revealWipe, fadeUpWords } from '@/utils/gsap/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +23,8 @@ function Footer() {
     const slogan = useRef<El.P>(null);
     const availability = useRef<El.P>(null);
     const divider = useRef<El.Div>(null);
+    const author = useRef<El.P>(null);
+    const copyright = useRef<El.P>(null);
     
     const t = useTranslations('global');
 
@@ -38,15 +40,25 @@ function Footer() {
 
     useGSAP(() => {
         if (typeof window == 'undefined') return;
-        if (!footer.current || !slogan.current || !availability.current || !divider.current) return;
+        if (
+            !footer.current       || 
+            !slogan.current       || 
+            !availability.current || 
+            !divider.current      || 
+            !author.current       || 
+            !copyright.current
+        ) return;
 
         const splitSlogan = magneticPull.prepare(slogan);
         const splitAvailability = charsSlideIn.prepare(availability);
+        const splitAuthor = fadeUpWords.prepare(author);
+        const splitCopyright = fadeUpWords.prepare(copyright);
 
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: footer.current,
-                start: '90% bottom'
+                start: '90% bottom',
+                toggleActions: 'restart none none reverse'
             },
             delay: 0.1
         });
@@ -55,6 +67,8 @@ function Footer() {
         tl.add(charsSlideIn.animate(splitAvailability), "<0.1");
         tl.add(drawDivider(divider), '<0.5');
         tl.add(revealWipe(linksRef, { stagger: 0.2 }), '<0.1');
+        tl.add(fadeUpWords.animate(splitAuthor), '<0.1');
+        tl.add(fadeUpWords.animate(splitCopyright), '<0.2');
     }, { scope: footer });
 
     return (
@@ -89,8 +103,8 @@ function Footer() {
             </section>
 
             <div className={s.bottom}>
-                <p className={s.humanTouch}>{ t('footer.humanTouch.designed_and_engineered_by') } <a target='_blank'>{ t('footer.humanTouch.jakub_barczynski') }</a>. { t('footer.humanTouch.powered_by_nextjs') }</p>
-                <p className={s.copyright}>{ t('footer.copyright') }</p>
+                <p className={s.author} ref={author}>{ t('footer.author.designed_and_engineered_by') } <a target='_blank'>{ t('footer.author.jakub_barczynski') }</a>. { t('footer.author.powered_by_nextjs') }</p>
+                <p className={s.copyright} ref={copyright}>{ t('footer.copyright') }</p>
             </div>
         </footer>
     );
