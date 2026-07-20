@@ -32,7 +32,7 @@ function Sidebar({ open, setSidebarOpen } : Props) {
                 top: 0,
                 ease: 'back.out(1)'
         });
-        tl.add(revealWipe(linksRef, { stagger: 0.1 }), '<0');
+        tl.add(revealWipe(linksRef, { stagger: 0.1 }), '<');
 
         tlRef.current = tl;
 
