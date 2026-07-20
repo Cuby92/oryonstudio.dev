@@ -358,6 +358,7 @@ export const drawDivider: GSAPAnimation = (target, options) => {
     return gsap.from(divider, {
         height: 0,
         duration: 0.5,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        ...options
     });
 }
