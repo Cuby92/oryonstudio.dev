@@ -11,12 +11,20 @@ export namespace El {
   export type P    = HTMLParagraphElement;
   export type Li   = HTMLLIElement;
   export type Span = HTMLSpanElement;
-  export type Text = HTMLHeadingElement | HTMLParagraphElement | HTMLLIElement | HTMLSpanElement;
+  export type Text = HTMLHeadingElement | HTMLParagraphElement | HTMLLIElement | HTMLSpanElement | HTMLAnchorElement;
 
   export type Btn  = HTMLButtonElement;
   export type Div  = HTMLDivElement;
   export type A    = HTMLAnchorElement;
 }
+
+// E L E M E N T S
+export type Elements<T extends HTMLElement | null = any> = 
+    | Ref<T>
+    | Ref<T>[]
+    | React.RefObject<T[]>
+    | T
+    | (T | null)[];
 
 // R E F S
 export type Ref<T extends HTMLElement | null = HTMLElement | null> = React.RefObject<T>;
@@ -47,8 +55,8 @@ export interface DeviceSpecs {
 }
 
 // G S A P   A N I M A T I O N   T Y P E S
-export type GSAPAnimation<T extends Ref<any> = Ref<any>> = (
-    el: T | T[],
+export type GSAPAnimation<T extends HTMLElement | null = any> = (
+    el: Elements,
     options?: gsap.TweenVars
 ) => gsap.core.Tween | gsap.core.Timeline;
 
