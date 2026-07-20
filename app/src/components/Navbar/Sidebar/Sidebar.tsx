@@ -39,7 +39,7 @@ function Sidebar({ open, setSidebarOpen } : Props) {
         return () => {
             tl.kill();
         }
-    })
+    }, { scope: sidebar });
 
     useGSAP(() => {
         if (typeof window === 'undefined')  return;
@@ -54,7 +54,7 @@ function Sidebar({ open, setSidebarOpen } : Props) {
             tl.timeScale(1.2);
             tl.reverse();
         }
-    }, { dependencies: [open] });
+    }, { dependencies: [open], scope: sidebar });
 
     const t = useTranslations('global.links');
 
