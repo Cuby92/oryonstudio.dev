@@ -9,7 +9,7 @@ import { useGSAP } from '@gsap/react';
 import { El, Ref } from '@/utils/types';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { linksColumnSlide } from '@/utils/gsap/animations';
+import { revealWipe } from '@/utils/gsap/animations';
 
 const s = styles;
 
@@ -21,22 +21,38 @@ interface Props {
 function Sidebar({ open, setSidebarOpen } : Props) {
     const sidebar: Ref<El.Div | null> = useRef<El.Div>(null);
     const pathname = usePathname();
+    const tlRef = useRef<gsap.core.Timeline>(null);
+
+    useGSAP(() => {
+        if (typeof window === 'undefined') return;
+
+        const tl = gsap.timeline({ paused: true });
+        tl.to(sidebar.current, {
+            duration: 1,
+                top: 0,
+                ease: 'back.out(1)'
+        });
+        tl.add(revealWipe(linksRef, { stagger: 0.1 }), '<0');
+
+        tlRef.current = tl;
+
+        return () => {
+            tl.kill();
+        }
+    })
 
     useGSAP(() => {
         if (typeof window === 'undefined')  return;
+        if (!tlRef.current) return;
+
+        const tl = tlRef.current;
 
         if (open) {
-            gsap.to(sidebar.current, {
-                duration: 1,
-                top: 0,
-                ease: 'back.out(1)'
-            });
+            tl.timeScale(1);
+            tl.play();
         } else {
-            gsap.to(sidebar.current, {
-                duration: 1,
-                top: '-100%',
-                ease: 'back.in(1)'
-            });
+            tl.timeScale(1.2);
+            tl.reverse();
         }
     }, { dependencies: [open] });
 
@@ -50,12 +66,7 @@ function Sidebar({ open, setSidebarOpen } : Props) {
         { href: '/contact',    label: t('contact')    }
     ], [t]);
 
-    const linksRefs = Array.from({ length: links.length }, () => useRef<El.A>(null))
-
-    useGSAP(() => {
-        if (open) linksColumnSlide. in(linksRefs);
-        else      linksColumnSlide.out(linksRefs);
-    }, { dependencies: [open] });
+    const linksRef = useRef<(El.A | null)[]>([]);
 
     function createLink(link: LinkTemplate, index: number) {
         const isHome = pathname.length == 3 && link.href == '/';
@@ -68,7 +79,7 @@ function Sidebar({ open, setSidebarOpen } : Props) {
                 href={link.href}
                 label={link.label}
                 active={pathname.substring(3) === link.href || isHome}
-                ref={linksRefs[index]}
+                ref={el => { linksRef.current[index] = el }}
             />
         );
     }

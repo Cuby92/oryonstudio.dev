@@ -5,40 +5,6 @@ import type { El, GSAPAnimation } from '@/utils/types';
 
 gsap.registerPlugin(SplitText, CSSPlugin);
 
-export const linksColumnSlide: {
-    in:  GSAPAnimation;
-    out: GSAPAnimation;
-} = {
-    in: (elements, options) => {
-        const targets = convertElements(elements);
-        return gsap.fromTo(targets, {
-            x: index => index % 2 == 0 ? 50 : -50,
-            opacity: 0
-        }, {
-            duration: 0.75,
-            stagger: 0.2,
-            x: 0,
-            opacity: 1,
-            ease: 'power1.out',
-            ...options
-        });
-    },
-    out: (elements, options) => {
-        const targets = convertElements(elements);
-        return gsap.fromTo(targets, {
-            x: 0,
-            opacity: 1,
-        }, {
-            duration: 0.5,
-            stagger: 0.1,
-            x: index => index % 2 != 0 ? 50 : -50,
-            opacity: 0,
-            ease: 'power1.out',
-            ...options
-        });
-    }
-}
-
 /**
  * A reusable GSAP slide-in with skew animation.
  * @param el element to be animated; can be anything of type `Elements`
