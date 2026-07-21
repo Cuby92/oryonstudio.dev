@@ -28,4 +28,19 @@
 .item {
     height: 4rem;
     width: auto;
+    display: flex;
+    font-size: 2rem;
+    align-items: center;
+    font-weight: 500;
+
+    .divider {
+        height: 100%;
+        width: 3px;
+        margin-inline: 1rem;
+    }
+
+    .img {
+        height: 100%;
+        width: auto;
+    }
 }
