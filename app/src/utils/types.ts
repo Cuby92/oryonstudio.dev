@@ -35,12 +35,13 @@ export interface Children {
 }
 
 export interface LinkProps extends Children {
-    href:       string,
-    className?: string,
-    active?:    boolean,
-    visited?:   boolean,
-    label?:     string,
-    ref?:       React.Ref<El.A>
+    href:       string;
+    className?: string;
+    active?:    boolean;
+    visited?:   boolean;
+    label?:     string;
+    ref?:       React.Ref<El.A>;
+    style?:     React.CSSProperties;
 }
 
 export interface LinkTemplate {
