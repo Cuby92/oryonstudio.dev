@@ -54,5 +54,13 @@
         .cta {
             margin-top: 1rem;
         }
+
+        .marquee {
+            transform: rotate(-7deg);
+            transform-origin: bottom left;
+            position: absolute;
+            left: 0;
+            bottom: -3rem;
+        }
     }
 }

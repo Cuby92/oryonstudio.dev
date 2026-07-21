@@ -1,0 +1,31 @@
+@use '../../utils/variables.scss' as *;
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    } 100% {
+        transform: translateX(-100%);
+    }
+}
+
+.marquee {
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+    background-color: #fff;
+    padding-block: 1.5rem;
+
+    .track {
+        display: flex;
+        flex-shrink: 0;
+        gap: 5rem;
+        white-space: nowrap;
+        animation: marquee 40s linear infinite;
+        padding-right: 5rem;
+    }
+}
+
+.item {
+    height: 4rem;
+    width: auto;
+}

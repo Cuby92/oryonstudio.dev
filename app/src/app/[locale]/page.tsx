@@ -4,8 +4,8 @@ import Footer from '@/components/Footer/Footer';
 import Slide from '@/components/Slide/Slide';
 import { useTranslations } from 'next-intl';
 import LiquidAurora from '@/components/shaders/LiquidAurora';
-import Link from 'next/link';
 import LabelButton from '@/components/links/LabelButton';
+import CollabsMarquee from '@/components/marquee/CollabsMarquee';
 
 const s = styles;
 
@@ -26,6 +26,7 @@ function Home() {
               dualLabel={{ internal: 'Work with Us', external: 'Starting from $2000' }}
               className={s.cta}
             />
+            <CollabsMarquee className={s.marquee} />
           </section>
         </Slide>
       </main>
