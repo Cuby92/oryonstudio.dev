@@ -1,6 +1,7 @@
 'use client';
 
 import ShaderWrapper from './ShaderWrapper';
+import placeholder from '/placeholders/shaders/liquid-aurora.png';
 
 import dynamic from 'next/dynamic';
 const Aurora     = dynamic(() => import('shaders/react').then(mod => mod.Aurora),     { ssr: false });
@@ -8,7 +9,7 @@ const ChromaFlow = dynamic(() => import('shaders/react').then(mod => mod.ChromaF
 
 function LiquidAurora() {
     return (
-        <ShaderWrapper>
+        <ShaderWrapper imagePlaceholder={placeholder}>
             <Aurora
                 colorA='#00f'
                 colorB='#44f'
