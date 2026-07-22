@@ -2,14 +2,32 @@
 
 import { Children } from '@/utils/types';
 import styles from './LoadingPage.module.scss';
+import { useState, useEffect } from 'react';
 
 const s = styles;
 const ROWS = 4;
 
 function LoadingPage({ children }: Children) {
+    const [loaded, setLoaded] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleLoad = () => {
+            setLoaded(true);
+            console.log(loaded);
+        }
+
+        if (document.readyState === 'complete') {
+            handleLoad();
+        } else {
+            window.addEventListener('load', handleLoad);
+        }
+
+        return () => window.removeEventListener('load', handleLoad);
+    }, []);
+
     return (
         <>
-            <div className={s.grid}>
+            <div className={`${s.grid} ${loaded ? s.loaded : ''}`}>
                 { Array.from({ length: ROWS }).map((_, i) => (
                     <div key={i} className={s.block} />
                 )) }

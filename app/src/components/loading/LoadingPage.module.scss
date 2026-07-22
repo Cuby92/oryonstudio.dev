@@ -17,6 +17,11 @@
     width: 100%;
     background-color: #222;
     transform-origin: right center;
+
+
+}
+
+.loaded .block {
     animation: wipeOut 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 
     @for $i from 1 through 4 {
