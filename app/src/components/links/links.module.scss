@@ -66,10 +66,18 @@
         text-decoration: none;
     }
 
-    &:hover {
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            box-shadow: none;
+            --lightOpacity: 1;
+        }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
         box-shadow: none;
         --lightOpacity: 1;
     }
+    
 
     .flare {
         width: 4rem;
