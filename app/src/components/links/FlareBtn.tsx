@@ -10,7 +10,7 @@ interface Props extends LinkProps {
 
 function FlareBtn({ children, href, className, ref, style, prior = false }: Props) {
     return (
-        <div className={`${className} ${s.flareBtn} ${prior ? s.prior : ''}`}>
+        <div className={`${className || ''} ${s.flareBtn} ${prior ? s.prior : ''}`}>
             <span className={s.glow} />
             <span className={s.flare} />
             <Link
