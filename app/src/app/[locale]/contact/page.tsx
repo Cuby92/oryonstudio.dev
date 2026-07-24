@@ -66,6 +66,12 @@ function Contact() {
 
                             <div className={s.modal}>
                                 <h2>What type of website are you looking for?</h2>
+
+                                <div className={s.form}>
+                                    <Options options={['Informational', 'Web App', 'Ecommerce']}>
+                                        <TextField name="custom" placeholder="Custom" />
+                                    </Options>
+                                </div>
                             </div>
                         </div>
                     </HorizontalPanel>
