@@ -24,8 +24,9 @@
 }
 
 .form {
-    .question {
+    .question, .summary {
         position: relative;
+        text-align: center;
 
         .bgText {
             height: 95vh;
